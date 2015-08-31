@@ -1,0 +1,15 @@
+//
+//  PrefixHeader.pch
+//  HelpBuy
+//
+//  Created by 駿逸 陳 on 2015/8/31.
+//  Copyright (c) 2015年 駿逸 陳. All rights reserved.
+//
+
+#ifndef HelpBuy_PrefixHeader_pch
+#define HelpBuy_PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif
