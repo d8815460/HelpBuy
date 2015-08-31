@@ -7,6 +7,14 @@
 //
 
 #import "AppDelegate.h"
+#import <ParseFacebookUtilsV4/PFFacebookUtils.h>
+#import <ParseCrashReporting/ParseCrashReporting.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
+
+
+static AppDelegate *sharedDelegate;
 
 @interface AppDelegate ()
 
@@ -14,11 +22,109 @@
 
 @implementation AppDelegate
 
++ (AppDelegate *)sharedDelegate {
+    if (!sharedDelegate) {
+        sharedDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    }
+    return sharedDelegate;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    return YES;
+    [Fabric with:@[[Crashlytics class]]];
+
+    
+    // Enable storing and querying data from Local Datastore. Remove this line if you don't want to
+    // use Local Datastore features or want to use cachePolicy.
+    [Parse enableLocalDatastore];
+    
+    // ****************************************************************************
+    // Uncomment this line if you want to enable Crash Reporting
+    [ParseCrashReporting enable];
+    //
+    // Uncomment and fill in with your Parse credentials:
+    [Parse setApplicationId:@"EoAplzLMJaf7ZGSvpJEWvbKz0rEBlR3nKUG9pLww" clientKey:@"bqFHcDXeZCBdHfKMbTIInrFuy7SBVPkmRQZbeOkW"];
+    //
+    // If you are using Facebook, uncomment and add your FacebookAppID to your bundle's plist as
+    // described here: https://developers.facebook.com/docs/getting-started/facebook-sdk-for-ios/
+    //    [PFFacebookUtils initializeFacebook];
+    [PFFacebookUtils initializeFacebookWithApplicationLaunchOptions:launchOptions];
+    // ****************************************************************************
+    
+    [PFAnalytics trackAppOpenedWithLaunchOptionsInBackground:launchOptions block:nil];
+    
+    //自動產生一個用戶
+    [PFUser enableAutomaticUser];
+    [[PFUser currentUser] incrementKey:@"RunCount"];
+    [[PFUser currentUser] saveInBackground];
+    
+    
+    PFACL *defaultACL = [PFACL ACL];
+    // If you would like all objects to be private by default, remove this line.
+    [defaultACL setPublicReadAccess:YES];
+    
+    [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
+    
+    // Override point for customization after application launch.
+    [self.window makeKeyAndVisible];
+    
+    if (application.applicationState != UIApplicationStateBackground) {
+        // Track an app open here if we launch with a push, unless
+        // "content_available" was used to trigger a background push (introduced in iOS 7).
+        // In that case, we skip tracking here to avoid double counting the app-open.
+        BOOL preBackgroundPush = ![application respondsToSelector:@selector(backgroundRefreshStatus)];
+        BOOL oldPushHandlerOnly = ![self respondsToSelector:@selector(application:didReceiveRemoteNotification:fetchCompletionHandler:)];
+        BOOL noPushPayload = ![launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+        if (preBackgroundPush || oldPushHandlerOnly || noPushPayload) {
+            [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+        }
+    }
+    
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
+    if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+        UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
+                                                        UIUserNotificationTypeBadge |
+                                                        UIUserNotificationTypeSound);
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes
+                                                                                 categories:nil];
+        [application registerUserNotificationSettings:settings];
+        [application registerForRemoteNotifications];
+    }
+#else
+    [application registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+                                                     UIRemoteNotificationTypeAlert |
+                                                     UIRemoteNotificationTypeSound)];
+#endif
+    
+    return [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
 }
+
+
+#pragma mark Push Notifications
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    [currentInstallation setDeviceTokenFromData:deviceToken];
+    [currentInstallation saveInBackground];
+    
+    [PFPush subscribeToChannelInBackground:@"" block:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            NSLog(@"ParseStarterProject successfully subscribed to push notifications on the broadcast channel.");
+        } else {
+            NSLog(@"ParseStarterProject failed to subscribe to push notifications on the broadcast channel.");
+        }
+    }];
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    if (error.code == 3010) {
+        NSLog(@"Push notifications are not supported in the iOS Simulator.");
+    } else {
+        // show some alert or otherwise handle the failure to register.
+        NSLog(@"application:didFailToRegisterForRemoteNotificationsWithError: %@", error);
+    }
+}
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -42,6 +148,24 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     // Saves changes in the application's managed object context before the application terminates.
     [self saveContext];
+}
+
+///////////////////////////////////////////////////////////
+// Uncomment this method if you want to use Push Notifications with Background App Refresh
+///////////////////////////////////////////////////////////
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    if (application.applicationState == UIApplicationStateInactive) {
+        [PFAnalytics trackAppOpenedWithRemoteNotificationPayload:userInfo];
+    }
+}
+
+#pragma mark Facebook SDK Integration
+///////////////////////////////////////////////////////////
+// Uncomment this method if you are using Facebook
+///////////////////////////////////////////////////////////
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    
+    return [[FBSDKApplicationDelegate sharedInstance] application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
 }
 
 #pragma mark - Core Data stack
@@ -122,6 +246,73 @@
             abort();
         }
     }
+}
+
+
+#pragma mark - 轉場至首頁
+//轉場至首頁
+- (void)presentToHomePage{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UINavigationController *homeNav = [storyboard instantiateViewControllerWithIdentifier:@"UITabBar"];
+    self.window.rootViewController = homeNav;
+    self.window.backgroundColor = [UIColor blackColor];
+    [self.window makeKeyAndVisible];
+}
+
+#pragma mark - 轉場至登入畫面
+//轉場至登入畫面
+- (void)presentToLoginPage{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"LoginSignup" bundle:nil];
+    UIViewController *homeNav = [storyboard instantiateViewControllerWithIdentifier:@"loginNav"];
+    self.window.rootViewController = homeNav;
+    self.window.backgroundColor = [UIColor blackColor];
+    [self.window makeKeyAndVisible];
+}
+
+#pragma mark - 轉場至發布約
+//轉場至發布約
+- (void)presentToPostPage{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ManPost" bundle:nil];
+    UINavigationController *homeNav = [storyboard instantiateViewControllerWithIdentifier:@"manPostNav"];
+    self.window.rootViewController = homeNav;
+    self.window.backgroundColor = [UIColor blackColor];
+    [self.window makeKeyAndVisible];
+}
+
+#pragma mark - 登出
+- (void)logOut{
+    // clear cache
+    [[CMCache sharedCache] clear];
+    
+    // clear NSUserDefaults
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kPAPUserDefaultsCacheFacebookFriendsKey];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kPAPUserDefaultsActivityFeedViewControllerLastRefreshKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    NSLog(@"install 4");
+    [[PFInstallation currentInstallation] setObject:@[@""] forKey:kPAPInstallationChannelsKey];
+    [[PFInstallation currentInstallation] removeObjectForKey:kPAPInstallationUserKey];
+    [[PFInstallation currentInstallation] removeObjectForKey:@"channels"];
+    //    [[PFInstallation currentInstallation] removeObjectForKey:@"deviceToken"];
+    [[PFInstallation currentInstallation] saveInBackground];
+    
+    // Clear all caches
+    [PFQuery clearAllCachedResults];
+    
+    //要把用戶名稱刪除
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults removeObjectForKey:kCMUserNameString];
+    [userDefaults removeObjectForKey:@"mediumImage"];
+    [userDefaults removeObjectForKey:@"smallRoundedImage"];
+    [userDefaults removeObjectForKey:@"isPhoneVerified"];
+    [userDefaults removeObjectForKey:@"email"];
+    [userDefaults removeObjectForKey:@"emailVerified"];
+    [userDefaults removeObjectForKey:@"facebookId"];
+    
+    [userDefaults synchronize];
+    [PFUser logOut];
+    
+    [self presentToLoginPage];
 }
 
 @end

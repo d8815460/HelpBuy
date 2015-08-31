@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Parse.h>
 
 @interface CMCache : NSObject
 

@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CSAnimationView.h>
 
-@interface PopTableViewCell : UITableViewCell
+@interface PopTableViewCell : PFTableViewCell
 
+@property (strong, nonatomic) IBOutlet UIView *isSelectView;
+@property (strong, nonatomic) IBOutlet CSAnimationView *categoryView;
+@property (strong, nonatomic) IBOutlet UILabel *titleLabel;
+@property (strong, nonatomic) IBOutlet UILabel *timeLabel;
+@property (strong, nonatomic) IBOutlet UILabel *categoryLabel;
 @end

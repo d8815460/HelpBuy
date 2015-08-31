@@ -7,6 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		236EED411B9483FF0067B2F1 /* CMCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 236EED3A1B9483FF0067B2F1 /* CMCache.m */; };
+		236EED421B9483FF0067B2F1 /* CMConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 236EED3C1B9483FF0067B2F1 /* CMConstants.m */; };
+		236EED431B9483FF0067B2F1 /* CMUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 236EED3E1B9483FF0067B2F1 /* CMUtility.m */; };
+		236EED441B9483FF0067B2F1 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 236EED401B9483FF0067B2F1 /* Utils.m */; };
+		236EED641B9485190067B2F1 /* NSString+Empty.m in Sources */ = {isa = PBXBuildFile; fileRef = 236EED491B9485190067B2F1 /* NSString+Empty.m */; };
+		236EED651B9485190067B2F1 /* MinnaMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 236EED4C1B9485190067B2F1 /* MinnaMessageView.m */; };
+		236EED661B9485190067B2F1 /* MinnaOpenGraphRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 236EED4F1B9485190067B2F1 /* MinnaOpenGraphRequest.m */; };
+		236EED671B9485190067B2F1 /* MyFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 236EED521B9485190067B2F1 /* MyFile.m */; };
+		236EED681B9485190067B2F1 /* UIImage+AlphaAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 236EED551B9485190067B2F1 /* UIImage+AlphaAdditions.m */; };
+		236EED691B9485190067B2F1 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 236EED571B9485190067B2F1 /* UIImage+ImageEffects.m */; };
+		236EED6A1B9485190067B2F1 /* UIImage+ResizeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 236EED591B9485190067B2F1 /* UIImage+ResizeAdditions.m */; };
+		236EED6B1B9485190067B2F1 /* UIImage+RoundedCornerAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 236EED5B1B9485190067B2F1 /* UIImage+RoundedCornerAdditions.m */; };
+		236EED6C1B9485190067B2F1 /* UIImage+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 236EED5D1B9485190067B2F1 /* UIImage+Utils.m */; };
+		236EED6D1B9485190067B2F1 /* UISwipe4ScrollGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 236EED601B9485190067B2F1 /* UISwipe4ScrollGestureRecognizer.m */; };
+		236EED6E1B9485190067B2F1 /* UuidLib.m in Sources */ = {isa = PBXBuildFile; fileRef = 236EED631B9485190067B2F1 /* UuidLib.m */; };
+		236EED721B9489E70067B2F1 /* MainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 236EED711B9489E70067B2F1 /* MainTableViewController.m */; };
+		236EED781B949CF70067B2F1 /* PopTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 236EED771B949CF70067B2F1 /* PopTableViewCell.m */; };
 		23D7DA801B7733D6001A127A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 23D7DA7F1B7733D6001A127A /* main.m */; };
 		23D7DA831B7733D6001A127A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 23D7DA821B7733D6001A127A /* AppDelegate.m */; };
 		23D7DA861B7733D6001A127A /* HelpBuy.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 23D7DA841B7733D6001A127A /* HelpBuy.xcdatamodeld */; };
@@ -15,6 +32,7 @@
 		23D7DA8E1B7733D6001A127A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 23D7DA8D1B7733D6001A127A /* Images.xcassets */; };
 		23D7DA911B7733D6001A127A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 23D7DA8F1B7733D6001A127A /* LaunchScreen.xib */; };
 		23D7DA9D1B7733D7001A127A /* HelpBuyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 23D7DA9C1B7733D7001A127A /* HelpBuyTests.m */; };
+		2CB80F5C005F225F9EA843DE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 64A423E0ACF5815700116D55 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,6 +46,42 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		236EED391B9483FF0067B2F1 /* CMCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMCache.h; sourceTree = "<group>"; };
+		236EED3A1B9483FF0067B2F1 /* CMCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMCache.m; sourceTree = "<group>"; };
+		236EED3B1B9483FF0067B2F1 /* CMConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMConstants.h; sourceTree = "<group>"; };
+		236EED3C1B9483FF0067B2F1 /* CMConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMConstants.m; sourceTree = "<group>"; };
+		236EED3D1B9483FF0067B2F1 /* CMUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMUtility.h; sourceTree = "<group>"; };
+		236EED3E1B9483FF0067B2F1 /* CMUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMUtility.m; sourceTree = "<group>"; };
+		236EED3F1B9483FF0067B2F1 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		236EED401B9483FF0067B2F1 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
+		236EED451B9484650067B2F1 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PrefixHeader.pch; path = HelpBuyTests/PrefixHeader.pch; sourceTree = SOURCE_ROOT; };
+		236EED481B9485190067B2F1 /* NSString+Empty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Empty.h"; sourceTree = "<group>"; };
+		236EED491B9485190067B2F1 /* NSString+Empty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Empty.m"; sourceTree = "<group>"; };
+		236EED4B1B9485190067B2F1 /* MinnaMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinnaMessageView.h; sourceTree = "<group>"; };
+		236EED4C1B9485190067B2F1 /* MinnaMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinnaMessageView.m; sourceTree = "<group>"; };
+		236EED4D1B9485190067B2F1 /* MinnaNotificationProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinnaNotificationProtocol.h; sourceTree = "<group>"; };
+		236EED4E1B9485190067B2F1 /* MinnaOpenGraphRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinnaOpenGraphRequest.h; sourceTree = "<group>"; };
+		236EED4F1B9485190067B2F1 /* MinnaOpenGraphRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinnaOpenGraphRequest.m; sourceTree = "<group>"; };
+		236EED511B9485190067B2F1 /* MyFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFile.h; sourceTree = "<group>"; };
+		236EED521B9485190067B2F1 /* MyFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFile.m; sourceTree = "<group>"; };
+		236EED541B9485190067B2F1 /* UIImage+AlphaAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+AlphaAdditions.h"; sourceTree = "<group>"; };
+		236EED551B9485190067B2F1 /* UIImage+AlphaAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+AlphaAdditions.m"; sourceTree = "<group>"; };
+		236EED561B9485190067B2F1 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		236EED571B9485190067B2F1 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		236EED581B9485190067B2F1 /* UIImage+ResizeAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ResizeAdditions.h"; sourceTree = "<group>"; };
+		236EED591B9485190067B2F1 /* UIImage+ResizeAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ResizeAdditions.m"; sourceTree = "<group>"; };
+		236EED5A1B9485190067B2F1 /* UIImage+RoundedCornerAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedCornerAdditions.h"; sourceTree = "<group>"; };
+		236EED5B1B9485190067B2F1 /* UIImage+RoundedCornerAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCornerAdditions.m"; sourceTree = "<group>"; };
+		236EED5C1B9485190067B2F1 /* UIImage+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Utils.h"; sourceTree = "<group>"; };
+		236EED5D1B9485190067B2F1 /* UIImage+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Utils.m"; sourceTree = "<group>"; };
+		236EED5F1B9485190067B2F1 /* UISwipe4ScrollGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UISwipe4ScrollGestureRecognizer.h; sourceTree = "<group>"; };
+		236EED601B9485190067B2F1 /* UISwipe4ScrollGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UISwipe4ScrollGestureRecognizer.m; sourceTree = "<group>"; };
+		236EED621B9485190067B2F1 /* UuidLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UuidLib.h; sourceTree = "<group>"; };
+		236EED631B9485190067B2F1 /* UuidLib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UuidLib.m; sourceTree = "<group>"; };
+		236EED701B9489E70067B2F1 /* MainTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTableViewController.h; sourceTree = "<group>"; };
+		236EED711B9489E70067B2F1 /* MainTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTableViewController.m; sourceTree = "<group>"; };
+		236EED761B949CF70067B2F1 /* PopTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopTableViewCell.h; sourceTree = "<group>"; };
+		236EED771B949CF70067B2F1 /* PopTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopTableViewCell.m; sourceTree = "<group>"; };
 		23D7DA7A1B7733D6001A127A /* HelpBuy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelpBuy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		23D7DA7E1B7733D6001A127A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		23D7DA7F1B7733D6001A127A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -42,6 +96,9 @@
 		23D7DA961B7733D7001A127A /* HelpBuyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HelpBuyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		23D7DA9B1B7733D7001A127A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		23D7DA9C1B7733D7001A127A /* HelpBuyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelpBuyTests.m; sourceTree = "<group>"; };
+		28E36FFC5898F4971D1EB3A5 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		64A423E0ACF5815700116D55 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A63B7808991CF1A44AB6D09 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +106,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CB80F5C005F225F9EA843DE /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,12 +120,107 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		236EED381B9483EA0067B2F1 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				236EED391B9483FF0067B2F1 /* CMCache.h */,
+				236EED3A1B9483FF0067B2F1 /* CMCache.m */,
+				236EED3B1B9483FF0067B2F1 /* CMConstants.h */,
+				236EED3C1B9483FF0067B2F1 /* CMConstants.m */,
+				236EED3D1B9483FF0067B2F1 /* CMUtility.h */,
+				236EED3E1B9483FF0067B2F1 /* CMUtility.m */,
+				236EED3F1B9483FF0067B2F1 /* Utils.h */,
+				236EED401B9483FF0067B2F1 /* Utils.m */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		236EED461B9485190067B2F1 /* 常用的Library */ = {
+			isa = PBXGroup;
+			children = (
+				236EED471B9485190067B2F1 /* EmptyNSString */,
+				236EED4A1B9485190067B2F1 /* MinnaMessageView */,
+				236EED501B9485190067B2F1 /* MyFile */,
+				236EED531B9485190067B2F1 /* UIImage */,
+				236EED5E1B9485190067B2F1 /* UISwipe4ScrollGestureRecognizer */,
+				236EED611B9485190067B2F1 /* UUID */,
+			);
+			path = "常用的Library";
+			sourceTree = "<group>";
+		};
+		236EED471B9485190067B2F1 /* EmptyNSString */ = {
+			isa = PBXGroup;
+			children = (
+				236EED481B9485190067B2F1 /* NSString+Empty.h */,
+				236EED491B9485190067B2F1 /* NSString+Empty.m */,
+			);
+			path = EmptyNSString;
+			sourceTree = "<group>";
+		};
+		236EED4A1B9485190067B2F1 /* MinnaMessageView */ = {
+			isa = PBXGroup;
+			children = (
+				236EED4B1B9485190067B2F1 /* MinnaMessageView.h */,
+				236EED4C1B9485190067B2F1 /* MinnaMessageView.m */,
+				236EED4D1B9485190067B2F1 /* MinnaNotificationProtocol.h */,
+				236EED4E1B9485190067B2F1 /* MinnaOpenGraphRequest.h */,
+				236EED4F1B9485190067B2F1 /* MinnaOpenGraphRequest.m */,
+			);
+			path = MinnaMessageView;
+			sourceTree = "<group>";
+		};
+		236EED501B9485190067B2F1 /* MyFile */ = {
+			isa = PBXGroup;
+			children = (
+				236EED511B9485190067B2F1 /* MyFile.h */,
+				236EED521B9485190067B2F1 /* MyFile.m */,
+			);
+			path = MyFile;
+			sourceTree = "<group>";
+		};
+		236EED531B9485190067B2F1 /* UIImage */ = {
+			isa = PBXGroup;
+			children = (
+				236EED541B9485190067B2F1 /* UIImage+AlphaAdditions.h */,
+				236EED551B9485190067B2F1 /* UIImage+AlphaAdditions.m */,
+				236EED561B9485190067B2F1 /* UIImage+ImageEffects.h */,
+				236EED571B9485190067B2F1 /* UIImage+ImageEffects.m */,
+				236EED581B9485190067B2F1 /* UIImage+ResizeAdditions.h */,
+				236EED591B9485190067B2F1 /* UIImage+ResizeAdditions.m */,
+				236EED5A1B9485190067B2F1 /* UIImage+RoundedCornerAdditions.h */,
+				236EED5B1B9485190067B2F1 /* UIImage+RoundedCornerAdditions.m */,
+				236EED5C1B9485190067B2F1 /* UIImage+Utils.h */,
+				236EED5D1B9485190067B2F1 /* UIImage+Utils.m */,
+			);
+			path = UIImage;
+			sourceTree = "<group>";
+		};
+		236EED5E1B9485190067B2F1 /* UISwipe4ScrollGestureRecognizer */ = {
+			isa = PBXGroup;
+			children = (
+				236EED5F1B9485190067B2F1 /* UISwipe4ScrollGestureRecognizer.h */,
+				236EED601B9485190067B2F1 /* UISwipe4ScrollGestureRecognizer.m */,
+			);
+			path = UISwipe4ScrollGestureRecognizer;
+			sourceTree = "<group>";
+		};
+		236EED611B9485190067B2F1 /* UUID */ = {
+			isa = PBXGroup;
+			children = (
+				236EED621B9485190067B2F1 /* UuidLib.h */,
+				236EED631B9485190067B2F1 /* UuidLib.m */,
+			);
+			path = UUID;
+			sourceTree = "<group>";
+		};
 		23D7DA711B7733D6001A127A = {
 			isa = PBXGroup;
 			children = (
 				23D7DA7C1B7733D6001A127A /* HelpBuy */,
 				23D7DA991B7733D7001A127A /* HelpBuyTests */,
 				23D7DA7B1B7733D6001A127A /* Products */,
+				900F401D100F64EF9465D7C6 /* Pods */,
+				38CBC3817578B2FCB08CA552 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -83,10 +236,16 @@
 		23D7DA7C1B7733D6001A127A /* HelpBuy */ = {
 			isa = PBXGroup;
 			children = (
+				236EED461B9485190067B2F1 /* 常用的Library */,
+				236EED381B9483EA0067B2F1 /* Utils */,
 				23D7DA811B7733D6001A127A /* AppDelegate.h */,
 				23D7DA821B7733D6001A127A /* AppDelegate.m */,
 				23D7DA871B7733D6001A127A /* ViewController.h */,
 				23D7DA881B7733D6001A127A /* ViewController.m */,
+				236EED701B9489E70067B2F1 /* MainTableViewController.h */,
+				236EED711B9489E70067B2F1 /* MainTableViewController.m */,
+				236EED761B949CF70067B2F1 /* PopTableViewCell.h */,
+				236EED771B949CF70067B2F1 /* PopTableViewCell.m */,
 				23D7DA8A1B7733D6001A127A /* Main.storyboard */,
 				23D7DA8D1B7733D6001A127A /* Images.xcassets */,
 				23D7DA8F1B7733D6001A127A /* LaunchScreen.xib */,
@@ -99,6 +258,7 @@
 		23D7DA7D1B7733D6001A127A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				236EED451B9484650067B2F1 /* PrefixHeader.pch */,
 				23D7DA7E1B7733D6001A127A /* Info.plist */,
 				23D7DA7F1B7733D6001A127A /* main.m */,
 			);
@@ -122,6 +282,23 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		38CBC3817578B2FCB08CA552 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				64A423E0ACF5815700116D55 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		900F401D100F64EF9465D7C6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				28E36FFC5898F4971D1EB3A5 /* Pods.debug.xcconfig */,
+				9A63B7808991CF1A44AB6D09 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -129,9 +306,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 23D7DAA01B7733D7001A127A /* Build configuration list for PBXNativeTarget "HelpBuy" */;
 			buildPhases = (
+				84FDD7F0FDCB27C59F1E6DB3 /* Check Pods Manifest.lock */,
 				23D7DA761B7733D6001A127A /* Sources */,
 				23D7DA771B7733D6001A127A /* Frameworks */,
 				23D7DA781B7733D6001A127A /* Resources */,
+				F697F3C30885167CC2C52390 /* Copy Pods Resources */,
+				236EED6F1B9487E40067B2F1 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -217,15 +397,78 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		236EED6F1B9487E40067B2F1 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/Fabric.framework/run\" a903f72a6ffdd06539302df50101d05b48d830ea 039b2c50ea29ef03f71f5cb93b598bfdfe4a19a23054f66cdddd13275803e599";
+		};
+		84FDD7F0FDCB27C59F1E6DB3 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F697F3C30885167CC2C52390 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		23D7DA761B7733D6001A127A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				236EED6B1B9485190067B2F1 /* UIImage+RoundedCornerAdditions.m in Sources */,
+				236EED651B9485190067B2F1 /* MinnaMessageView.m in Sources */,
 				23D7DA831B7733D6001A127A /* AppDelegate.m in Sources */,
+				236EED691B9485190067B2F1 /* UIImage+ImageEffects.m in Sources */,
+				236EED6A1B9485190067B2F1 /* UIImage+ResizeAdditions.m in Sources */,
+				236EED661B9485190067B2F1 /* MinnaOpenGraphRequest.m in Sources */,
 				23D7DA861B7733D6001A127A /* HelpBuy.xcdatamodeld in Sources */,
+				236EED6C1B9485190067B2F1 /* UIImage+Utils.m in Sources */,
+				236EED721B9489E70067B2F1 /* MainTableViewController.m in Sources */,
+				236EED6E1B9485190067B2F1 /* UuidLib.m in Sources */,
+				236EED431B9483FF0067B2F1 /* CMUtility.m in Sources */,
+				236EED441B9483FF0067B2F1 /* Utils.m in Sources */,
+				236EED6D1B9485190067B2F1 /* UISwipe4ScrollGestureRecognizer.m in Sources */,
+				236EED681B9485190067B2F1 /* UIImage+AlphaAdditions.m in Sources */,
 				23D7DA891B7733D6001A127A /* ViewController.m in Sources */,
 				23D7DA801B7733D6001A127A /* main.m in Sources */,
+				236EED641B9485190067B2F1 /* NSString+Empty.m in Sources */,
+				236EED671B9485190067B2F1 /* MyFile.m in Sources */,
+				236EED411B9483FF0067B2F1 /* CMCache.m in Sources */,
+				236EED421B9483FF0067B2F1 /* CMConstants.m in Sources */,
+				236EED781B949CF70067B2F1 /* PopTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,8 +592,10 @@
 		};
 		23D7DAA11B7733D7001A127A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 28E36FFC5898F4971D1EB3A5 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/HelpBuyTests/PrefixHeader.pch";
 				INFOPLIST_FILE = HelpBuy/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -359,8 +604,10 @@
 		};
 		23D7DAA21B7733D7001A127A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9A63B7808991CF1A44AB6D09 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/HelpBuyTests/PrefixHeader.pch";
 				INFOPLIST_FILE = HelpBuy/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -420,6 +667,7 @@
 				23D7DAA21B7733D7001A127A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		23D7DAA31B7733D7001A127A /* Build configuration list for PBXNativeTarget "HelpBuyTests" */ = {
 			isa = XCConfigurationList;
@@ -428,6 +676,7 @@
 				23D7DAA51B7733D7001A127A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

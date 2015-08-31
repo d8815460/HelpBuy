@@ -17,9 +17,21 @@
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
++ (AppDelegate *)sharedDelegate;
+
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
 
+//轉場至首頁
+- (void)presentToHomePage;
 
+//轉場至登入畫面
+- (void)presentToLoginPage;
+
+//轉場至發布畫面
+- (void)presentToPostPage;
+
+//登出
+- (void)logOut;
 @end
 

@@ -10,6 +10,9 @@
 #import "UIImage+ResizeAdditions.h"
 #import <MBProgressHUD.h>
 #import <JSONKit.h>
+#import "CMConstants.h"
+#import "CMCache.h"
+
 typedef enum {
     ADVNavigationTypeTab = 0,
     ADVNavigationTypeMenu
