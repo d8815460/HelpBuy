@@ -22,7 +22,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
-        <!--代買項目-->
+        <!--共%@筆代買資訊-->
         <scene sceneID="K2n-Ow-UGP">
             <objects>
                 <tableViewController storyboardIdentifier="mainTable" useStoryboardIdentifierAsRestorationIdentifier="YES" id="90Q-bb-7BS" customClass="MainTableViewController" sceneMemberID="viewController">
@@ -49,7 +49,7 @@
                                                         <constraint firstAttribute="height" constant="21" id="ina-fJ-bFa"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -79,7 +79,7 @@
                                                 <constraint firstAttribute="height" constant="28" id="XTa-f7-cAB"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="plm-JG-k2a">
@@ -130,21 +130,106 @@
                             <outlet property="delegate" destination="90Q-bb-7BS" id="DD8-hk-cue"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="代買項目" id="346-Z2-n8s">
+                    <navigationItem key="navigationItem" title="共%@筆代買資訊" id="346-Z2-n8s">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="Xtm-80-bpt">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="UzX-Qx-wlU">
                                 <rect key="frame" x="535" y="7" width="50" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="選擇">
+                                <state key="normal" title="不拘">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="z2t-Ye-jfK" kind="push" id="AmF-L4-mzp"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VOk-gW-yig" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2040" y="628"/>
+        </scene>
+        <!--選擇類別-->
+        <scene sceneID="F4h-HA-rym">
+            <objects>
+                <tableViewController id="z2t-Ye-jfK" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="79" sectionHeaderHeight="22" sectionFooterHeight="22" id="e5F-qR-Zte">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="79" id="j3v-Gd-gm2">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="j3v-Gd-gm2" id="mmO-SM-sQt">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pnf-2D-VzE" customClass="CSAnimationView">
+                                            <rect key="frame" x="12" y="15" width="50" height="50"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="代買" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LiX-1j-y5h">
+                                                    <rect key="frame" x="4" y="14" width="42" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="N0a-Pq-ncz"/>
+                                                        <constraint firstAttribute="width" constant="42" id="ov2-zO-UB5"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.074509803920000006" green="0.78823529410000004" blue="0.74901960779999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="centerY" secondItem="LiX-1j-y5h" secondAttribute="centerY" id="Cq3-AL-Mtb"/>
+                                                <constraint firstAttribute="centerX" secondItem="LiX-1j-y5h" secondAttribute="centerX" id="Jwg-vR-cRN"/>
+                                                <constraint firstAttribute="width" constant="50" id="fUF-Ru-AbJ"/>
+                                                <constraint firstAttribute="height" constant="50" id="gA6-fI-cj8"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="25"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="delay">
+                                                    <integer key="value" value="0"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="duration">
+                                                    <real key="value" value="0.5"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="type" value="pop"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PaZ-pB-siC">
+                                            <rect key="frame" x="70" y="15" width="522" height="50"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="50" id="I56-VQ-SC0"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="centerY" secondItem="PaZ-pB-siC" secondAttribute="centerY" id="2xM-Kf-lRH"/>
+                                        <constraint firstItem="PaZ-pB-siC" firstAttribute="top" secondItem="mmO-SM-sQt" secondAttribute="topMargin" constant="7" id="FvJ-zV-acx"/>
+                                        <constraint firstItem="PaZ-pB-siC" firstAttribute="trailing" secondItem="mmO-SM-sQt" secondAttribute="trailingMargin" id="QKg-bp-cSB"/>
+                                        <constraint firstItem="Pnf-2D-VzE" firstAttribute="top" secondItem="mmO-SM-sQt" secondAttribute="topMargin" constant="7" id="YIs-bY-M5d"/>
+                                        <constraint firstItem="PaZ-pB-siC" firstAttribute="leading" secondItem="Pnf-2D-VzE" secondAttribute="trailing" constant="8" id="ZQ7-k5-TbV"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="PaZ-pB-siC" secondAttribute="bottom" constant="5.5" id="glf-N9-wdS"/>
+                                        <constraint firstItem="Pnf-2D-VzE" firstAttribute="leading" secondItem="mmO-SM-sQt" secondAttribute="leadingMargin" constant="4" id="s9S-eV-gp2"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="z2t-Ye-jfK" id="F2w-AE-gUY"/>
+                            <outlet property="delegate" destination="z2t-Ye-jfK" id="BRF-mO-cyz"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="選擇類別" id="Z5k-PU-Qkn"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WDQ-hD-8qu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2743" y="628"/>
         </scene>
         <!--設定-->
         <scene sceneID="9PW-q6-nov">

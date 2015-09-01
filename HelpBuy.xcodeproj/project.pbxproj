@@ -351,6 +351,7 @@
 				TargetAttributes = {
 					23D7DA791B7733D6001A127A = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = CHX656NT89;
 					};
 					23D7DA951B7733D7001A127A = {
 						CreatedOnToolsVersion = 6.4;
@@ -595,8 +596,10 @@
 			baseConfigurationReference = 28E36FFC5898F4971D1EB3A5 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/HelpBuyTests/PrefixHeader.pch";
 				INFOPLIST_FILE = HelpBuy/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -607,8 +610,10 @@
 			baseConfigurationReference = 9A63B7808991CF1A44AB6D09 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/HelpBuyTests/PrefixHeader.pch";
 				INFOPLIST_FILE = HelpBuy/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
