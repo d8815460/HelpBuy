@@ -9,6 +9,7 @@
 #import "MainTableViewController.h"
 #import "Canvas.h"
 #import "PopTableViewCell.h"
+#import "HelpBuyDetailViewController.h"
 
 @interface MainTableViewController ()
 
@@ -52,12 +53,6 @@
 - (PFQuery *)queryForTable {
     PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
     
-    // If no objects are loaded in memory, we look to the cache first to fill the table
-    // and then subsequently do a query against the network.
-//    if (self.objects.count == 0) {
-//        query.cachePolicy = kPFCachePolicyCacheThenNetwork;
-//    }
-    
     [query orderByDescending:@"post"];
     
     return query;
@@ -67,16 +62,17 @@
     PopTableViewCell *cell = (PopTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
     [cell startCanvasAnimation];
     
-    cell.isSelectView.alpha = 0.5;
+    cell.isSelectView.alpha = 0.3;
+    
+    PFObject *object = [self objectAtIndexPath:indexPath];
+    [self performSegueWithIdentifier:@"helpBuyDetail" sender:object];
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(PopTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     [cell startCanvasAnimation];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView
-         cellForRowAtIndexPath:(NSIndexPath *)indexPath
-                        object:(PFObject *)object {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
     static NSString *cellIdentifier = @"POPCell";
     
     PopTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
@@ -89,7 +85,6 @@
     cell.textLabel.text = object[@"title"];
     cell.categoryLabel.text = object[@"category"];
     
-    
     return cell;
 }
 
@@ -97,14 +92,18 @@
     return 79.0f;
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"helpBuyDetail"]) {
+        HelpBuyDetailViewController *viewController = [segue destinationViewController];
+        viewController.helpBuyObject = (PFObject *)sender;
+    }
 }
-*/
+
 
 @end

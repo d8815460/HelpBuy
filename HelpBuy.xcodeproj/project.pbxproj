@@ -32,6 +32,7 @@
 		23D7DA8E1B7733D6001A127A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 23D7DA8D1B7733D6001A127A /* Images.xcassets */; };
 		23D7DA911B7733D6001A127A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 23D7DA8F1B7733D6001A127A /* LaunchScreen.xib */; };
 		23D7DA9D1B7733D7001A127A /* HelpBuyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 23D7DA9C1B7733D7001A127A /* HelpBuyTests.m */; };
+		23F2A45C1B97257600D2B8E6 /* HelpBuyDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F2A45B1B97257600D2B8E6 /* HelpBuyDetailViewController.m */; };
 		2CB80F5C005F225F9EA843DE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 64A423E0ACF5815700116D55 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -96,6 +97,8 @@
 		23D7DA961B7733D7001A127A /* HelpBuyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HelpBuyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		23D7DA9B1B7733D7001A127A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		23D7DA9C1B7733D7001A127A /* HelpBuyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelpBuyTests.m; sourceTree = "<group>"; };
+		23F2A45A1B97257600D2B8E6 /* HelpBuyDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpBuyDetailViewController.h; sourceTree = "<group>"; };
+		23F2A45B1B97257600D2B8E6 /* HelpBuyDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpBuyDetailViewController.m; sourceTree = "<group>"; };
 		28E36FFC5898F4971D1EB3A5 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		64A423E0ACF5815700116D55 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A63B7808991CF1A44AB6D09 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -238,14 +241,11 @@
 			children = (
 				236EED461B9485190067B2F1 /* 常用的Library */,
 				236EED381B9483EA0067B2F1 /* Utils */,
+				23F2A4591B97253000D2B8E6 /* 代買 */,
 				23D7DA811B7733D6001A127A /* AppDelegate.h */,
 				23D7DA821B7733D6001A127A /* AppDelegate.m */,
 				23D7DA871B7733D6001A127A /* ViewController.h */,
 				23D7DA881B7733D6001A127A /* ViewController.m */,
-				236EED701B9489E70067B2F1 /* MainTableViewController.h */,
-				236EED711B9489E70067B2F1 /* MainTableViewController.m */,
-				236EED761B949CF70067B2F1 /* PopTableViewCell.h */,
-				236EED771B949CF70067B2F1 /* PopTableViewCell.m */,
 				23D7DA8A1B7733D6001A127A /* Main.storyboard */,
 				23D7DA8D1B7733D6001A127A /* Images.xcassets */,
 				23D7DA8F1B7733D6001A127A /* LaunchScreen.xib */,
@@ -280,6 +280,19 @@
 				23D7DA9B1B7733D7001A127A /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		23F2A4591B97253000D2B8E6 /* 代買 */ = {
+			isa = PBXGroup;
+			children = (
+				236EED761B949CF70067B2F1 /* PopTableViewCell.h */,
+				236EED771B949CF70067B2F1 /* PopTableViewCell.m */,
+				236EED701B9489E70067B2F1 /* MainTableViewController.h */,
+				236EED711B9489E70067B2F1 /* MainTableViewController.m */,
+				23F2A45A1B97257600D2B8E6 /* HelpBuyDetailViewController.h */,
+				23F2A45B1B97257600D2B8E6 /* HelpBuyDetailViewController.m */,
+			);
+			name = "代買";
 			sourceTree = "<group>";
 		};
 		38CBC3817578B2FCB08CA552 /* Frameworks */ = {
@@ -468,6 +481,7 @@
 				236EED641B9485190067B2F1 /* NSString+Empty.m in Sources */,
 				236EED671B9485190067B2F1 /* MyFile.m in Sources */,
 				236EED411B9483FF0067B2F1 /* CMCache.m in Sources */,
+				23F2A45C1B97257600D2B8E6 /* HelpBuyDetailViewController.m in Sources */,
 				236EED421B9483FF0067B2F1 /* CMConstants.m in Sources */,
 				236EED781B949CF70067B2F1 /* PopTableViewCell.m in Sources */,
 			);

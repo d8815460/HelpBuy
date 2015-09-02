@@ -32,7 +32,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="POPCell" rowHeight="79" id="PSV-fr-vRZ" customClass="PopTableViewCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="POPCell" rowHeight="79" id="PSV-fr-vRZ" customClass="PopTableViewCell">
                                 <rect key="frame" x="0.0" y="1589" width="320" height="79"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PSV-fr-vRZ" id="AL9-PW-yuc">
@@ -73,15 +73,6 @@
                                                 <userDefinedRuntimeAttribute type="string" keyPath="type" value="pop"/>
                                             </userDefinedRuntimeAttributes>
                                         </view>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QGH-u2-oRh">
-                                            <rect key="frame" x="67" y="26" width="525" height="28"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="28" id="XTa-f7-cAB"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="plm-JG-k2a">
                                             <rect key="frame" x="-8" y="0.0" width="7" height="79"/>
                                             <color key="backgroundColor" red="0.30196079609999998" green="0.74509805439999999" blue="0.84705889229999998" alpha="1" colorSpace="deviceRGB"/>
@@ -89,13 +80,22 @@
                                                 <constraint firstAttribute="width" constant="7" id="W1M-ot-KAf"/>
                                             </constraints>
                                         </view>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rnl-pr-YRj">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rnl-pr-YRj">
                                             <rect key="frame" x="556.5" y="49" width="35.5" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="0hP-0C-CRk"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QGH-u2-oRh">
+                                            <rect key="frame" x="67" y="26" width="525" height="28"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="28" id="XTa-f7-cAB"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -144,11 +144,57 @@
                     </navigationItem>
                     <connections>
                         <segue destination="z2t-Ye-jfK" kind="push" id="AmF-L4-mzp"/>
+                        <segue destination="Eez-3G-SWb" kind="push" identifier="helpBuyDetail" id="ZH5-qE-Fz8"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VOk-gW-yig" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2040" y="628"/>
+        </scene>
+        <!--代買內容-->
+        <scene sceneID="4PL-B4-5kY">
+            <objects>
+                <viewController id="Eez-3G-SWb" customClass="HelpBuyDetailViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bgs-a5-aQC"/>
+                        <viewControllerLayoutGuide type="bottom" id="Mav-nj-aFC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="m8K-Zf-hBi">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qXb-6j-dhx">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="qXb-6j-dhx" secondAttribute="centerX" id="42Z-aj-A2T"/>
+                            <constraint firstItem="qXb-6j-dhx" firstAttribute="leading" secondItem="m8K-Zf-hBi" secondAttribute="leadingMargin" constant="-16" id="KkC-0J-gm1"/>
+                            <constraint firstItem="qXb-6j-dhx" firstAttribute="top" secondItem="m8K-Zf-hBi" secondAttribute="topMargin" id="nM4-iB-3is"/>
+                            <constraint firstAttribute="centerY" secondItem="qXb-6j-dhx" secondAttribute="centerY" id="wL4-i7-rUI"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="qXb-6j-dhx" secondAttribute="trailing" constant="-16" id="xNg-Vo-Q3J"/>
+                            <constraint firstItem="qXb-6j-dhx" firstAttribute="bottom" secondItem="m8K-Zf-hBi" secondAttribute="bottomMargin" id="yx9-x0-gQh"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="代買內容" id="D29-5I-dns">
+                        <barButtonItem key="rightBarButtonItem" title="追蹤" id="Oed-uK-NUc">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="detailTextView" destination="qXb-6j-dhx" id="Lx2-ec-Vpb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fOZ-JL-EAN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2784" y="628"/>
         </scene>
         <!--選擇類別-->
         <scene sceneID="F4h-HA-rym">
@@ -229,7 +275,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WDQ-hD-8qu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2743" y="628"/>
+            <point key="canvasLocation" x="2040" y="-79"/>
         </scene>
         <!--設定-->
         <scene sceneID="9PW-q6-nov">
