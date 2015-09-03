@@ -52,6 +52,13 @@ static TTTTimeIntervalFormatter *timeFormatter;
     }
     
     PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
+    [query whereKey:@"category" notEqualTo:@"推薦"];
+    [query whereKey:@"category" notEqualTo:@"公告"];
+    [query whereKey:@"category" notEqualTo:@"問題"];
+    [query whereKey:@"category" notEqualTo:@"板務"];
+    [query whereKey:@"category" notEqualTo:@"情報"];
+    [query whereKey:@"category" notEqualTo:@"檢舉"];
+    [query whereKey:@"category" notEqualTo:@"參選"];
     [query countObjectsInBackgroundWithBlock:^(int number, NSError *error) {
         self.mainTitleLabel.text = [NSString stringWithFormat:@"共%i筆代買資訊", number];
     }];
@@ -66,6 +73,13 @@ static TTTTimeIntervalFormatter *timeFormatter;
 
 - (PFQuery *)queryForTable {
     PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
+    [query whereKey:@"category" notEqualTo:@"推薦"];
+    [query whereKey:@"category" notEqualTo:@"公告"];
+    [query whereKey:@"category" notEqualTo:@"問題"];
+    [query whereKey:@"category" notEqualTo:@"板務"];
+    [query whereKey:@"category" notEqualTo:@"情報"];
+    [query whereKey:@"category" notEqualTo:@"檢舉"];
+    [query whereKey:@"category" notEqualTo:@"參選"];
     
     [query orderByDescending:@"postDate"];
     
@@ -77,13 +91,23 @@ static TTTTimeIntervalFormatter *timeFormatter;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    PopTableViewCell *cell = (PopTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
-    [cell startCanvasAnimation];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    cell.isSelectView.alpha = 0.3;
+    if (indexPath.row < self.objects.count) {
+        PFObject *object = [self objectAtIndexPath:indexPath];
+        PopTableViewCell *cell = (PopTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+        [cell startCanvasAnimation];
+        
+        cell.isSelectView.alpha = 0.3;
+        
+        
+        [self performSegueWithIdentifier:@"helpBuyDetail" sender:object];
+    }else if (self.paginationEnabled) {
+        //load more
+        [self loadNextPage];
+    }
     
-    PFObject *object = [self objectAtIndexPath:indexPath];
-    [self performSegueWithIdentifier:@"helpBuyDetail" sender:object];
+    
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(PopTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -108,7 +132,13 @@ static TTTTimeIntervalFormatter *timeFormatter;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 79.0f;
+    if (indexPath.row < self.objects.count) {
+        return 79.0f;
+    } else if (self.paginationEnabled) {
+        // load more
+        return 44.0f;
+    }
+    return 44.0f;
 }
 
 
