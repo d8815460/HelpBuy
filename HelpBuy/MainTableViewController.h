@@ -10,4 +10,6 @@
 
 @interface MainTableViewController : PFQueryTableViewController
 
+@property (weak, nonatomic) IBOutlet UILabel *mainTitleLabel;
+
 @end

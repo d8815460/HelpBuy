@@ -10,6 +10,9 @@
 #import "Canvas.h"
 #import "PopTableViewCell.h"
 #import "HelpBuyDetailViewController.h"
+#import "TTTTimeIntervalFormatter.h"
+
+static TTTTimeIntervalFormatter *timeFormatter;
 
 @interface MainTableViewController ()
 
@@ -43,6 +46,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    if (!timeFormatter) {
+        timeFormatter = [[TTTTimeIntervalFormatter alloc] init];
+    }
+    
+    PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
+    [query countObjectsInBackgroundWithBlock:^(int number, NSError *error) {
+        self.mainTitleLabel.text = [NSString stringWithFormat:@"共%i筆代買資訊", number];
+    }];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -53,9 +67,13 @@
 - (PFQuery *)queryForTable {
     PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
     
-    [query orderByDescending:@"post"];
+    [query orderByDescending:@"postDate"];
     
     return query;
+}
+
+- (void)objectsDidLoad:(nullable NSError *)error {
+    [super objectsDidLoad:error];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -82,9 +100,10 @@
     }
 
     // Configure the cell to show todo item with a priority at the bottom
-    cell.textLabel.text = object[@"title"];
+    cell.titleLabel.text = object[@"title"];
     cell.categoryLabel.text = object[@"category"];
-    
+    [cell.timeLabel setText:[timeFormatter stringForTimeIntervalFromDate:[NSDate date] toDate:[object objectForKey:@"postDate"]]];
+//    cell.timeLabel.text = @"test";
     return cell;
 }
 
