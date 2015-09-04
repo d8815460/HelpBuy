@@ -92,16 +92,46 @@ static TTTTimeIntervalFormatter *timeFormatter;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if (indexPath.row < self.objects.count) {
-        PFObject *object = [self objectAtIndexPath:indexPath];
+        PFObject *buyObject = [self objectAtIndexPath:indexPath];
         PopTableViewCell *cell = (PopTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
         [cell startCanvasAnimation];
         
-        [object setObject:@YES forKey:@"isSelected"];
-        [object pinInBackground];
+        //先確認是否有DB資料
+        PFQuery *query = [PFQuery queryWithClassName:@"Love"];
+        [query whereKey:@"helpBuy" equalTo:buyObject];
+        [query whereKey:@"user" equalTo:[PFUser currentUser]];
+        [query fromLocalDatastore];
+        [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+            if (object) {
+                if (!object[@"isReaded"]) {
+                    [object setObject:@YES forKey:@"isReaded"];
+                    [object pinInBackground];
+                    
+                    PFACL *ACL = [PFACL ACL];
+                    [ACL setPublicReadAccess:YES];
+                    [ACL setPublicWriteAccess:YES];
+                    object.ACL = ACL;
+                    [object saveEventually];
+                }
+                
+            }else{
+                PFObject *SelectObject = [PFObject objectWithClassName:@"Love"];
+                [SelectObject setObject:@YES forKey:@"isReaded"];
+                [SelectObject setObject:[PFUser currentUser] forKey:@"user"];
+                [SelectObject setObject:buyObject forKey:@"helpBuy"];
+                [SelectObject pinInBackground];
+                
+                PFACL *ACL = [PFACL ACL];
+                [ACL setPublicReadAccess:YES];
+                [ACL setPublicWriteAccess:YES];
+                SelectObject.ACL = ACL;
+                [SelectObject saveEventually];
+            }
+        }];
         
         cell.isSelectView.alpha = 0.3;
         
-        [self performSegueWithIdentifier:@"helpBuyDetail" sender:object];
+        [self performSegueWithIdentifier:@"helpBuyDetail" sender:buyObject];
     }else if (self.paginationEnabled) {
         //load more
         [self loadNextPage];
@@ -126,21 +156,23 @@ static TTTTimeIntervalFormatter *timeFormatter;
     cell.categoryLabel.text = object[@"category"];
     [cell.timeLabel setText:[timeFormatter stringForTimeIntervalFromDate:[NSDate date] toDate:[object objectForKey:@"postDate"]]];
     
-    cell.helpBuyObject = object;
+    cell.helpBuyObject = object; //Parse上的物件
     
-    PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
-    [query whereKey:@"objectId" equalTo:object.objectId];
+    PFQuery *query = [PFQuery queryWithClassName:@"Love"];
+    [query whereKey:@"helpBuy" equalTo:object];
+    [query whereKey:@"user" equalTo:[PFUser currentUser]];
     [query fromLocalDatastore];
     [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
         if (object) {
-            if ([[object objectForKey:@"isSelected"] boolValue]) {
-                cell.isSelectView.alpha = 0.3;
-            }
-            
-            if ([[object objectForKey:@"isLoved"] boolValue]) {
+            if ([[object objectForKey:@"isFollowed"] boolValue]) {
                 [cell.isLovedButton setSelected:true];
             }else{
                 [cell.isLovedButton setSelected:false];
+            }
+            if ([[object objectForKey:@"isReaded"] boolValue]) {
+                cell.isSelectView.alpha = 0.3;
+            }else{
+                cell.isSelectView.alpha = 1.0;
             }
         }else{
             cell.isSelectView.alpha = 1.0;
@@ -148,6 +180,7 @@ static TTTTimeIntervalFormatter *timeFormatter;
         }
     }];
     
+
     return cell;
 }
 

@@ -56,7 +56,7 @@ static AppDelegate *sharedDelegate;
     //自動產生一個用戶
     [PFUser enableAutomaticUser];
     [[PFUser currentUser] incrementKey:@"RunCount"];
-    [[PFUser currentUser] saveInBackground];
+    [[PFUser currentUser] saveEventually];
     
     
     PFACL *defaultACL = [PFACL ACL];
@@ -96,6 +96,10 @@ static AppDelegate *sharedDelegate;
                                                      UIRemoteNotificationTypeSound)];
 #endif
     
+    //處理UI主題
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+//    [[UIBarButtonItem appearance] setTintColor:[UIColor whiteColor]];
+    
     return [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
 }
 
@@ -105,7 +109,7 @@ static AppDelegate *sharedDelegate;
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
     [currentInstallation setDeviceTokenFromData:deviceToken];
-    [currentInstallation saveInBackground];
+    [currentInstallation saveEventually];
     
     [PFPush subscribeToChannelInBackground:@"" block:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
@@ -294,7 +298,7 @@ static AppDelegate *sharedDelegate;
     [[PFInstallation currentInstallation] removeObjectForKey:kPAPInstallationUserKey];
     [[PFInstallation currentInstallation] removeObjectForKey:@"channels"];
     //    [[PFInstallation currentInstallation] removeObjectForKey:@"deviceToken"];
-    [[PFInstallation currentInstallation] saveInBackground];
+    [[PFInstallation currentInstallation] saveEventually];
     
     // Clear all caches
     [PFQuery clearAllCachedResults];

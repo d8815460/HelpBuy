@@ -23,6 +23,8 @@
     
     [_detailTextView setFont:[UIFont systemFontOfSize:17]];
     _detailTextView.text = [_helpBuyObject objectForKey:@"content"];
+    
+    [self.navigationController.navigationItem.backBarButtonItem setTintColor:[UIColor whiteColor]];
 }
 
 - (void)didReceiveMemoryWarning {

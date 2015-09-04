@@ -36,16 +36,16 @@
         //已經加入追蹤
         [self.isLovedButton setSelected:false];
         
-        [_helpBuyObject setObject:@NO forKey:@"isLoved"];
-        [_helpBuyObject pinInBackground];
+        
         
         PFQuery *query = [PFQuery queryWithClassName:@"Love"];
         [query whereKey:@"helpBuy" equalTo:_helpBuyObject];
+        [query whereKey:@"user" equalTo:[PFUser currentUser]];
         [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
             if (object) {
-                [object setObject:@NO forKey:@"isLoved"];
+                [object setObject:@NO forKey:@"isFollowed"];
                 [object pinInBackground];
-                
+
                 PFACL *ACL = [PFACL ACL];
                 [ACL setPublicReadAccess:YES];
                 [ACL setPublicWriteAccess:YES];
@@ -58,7 +58,7 @@
                 PFObject *LoveObject = [PFObject objectWithClassName:@"Love"];
                 [LoveObject setObject:_helpBuyObject forKey:@"helpBuy"];
                 [LoveObject setObject:[PFUser currentUser] forKey:@"user"];
-                [LoveObject setObject:@NO forKey:@"isLoved"];
+                [LoveObject setObject:@NO forKey:@"isFollowed"];
                 [LoveObject pinInBackground];
                 
                 PFACL *ACL = [PFACL ACL];
@@ -81,14 +81,12 @@
         //尚未加入追蹤
         [self.isLovedButton setSelected:true];
         
-        [_helpBuyObject setObject:@YES forKey:@"isLoved"];
-        [_helpBuyObject pinInBackground];
-        
         PFQuery *query = [PFQuery queryWithClassName:@"Love"];
         [query whereKey:@"helpBuy" equalTo:_helpBuyObject];
+        [query whereKey:@"user" equalTo:[PFUser currentUser]];
         [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
             if (object) {
-                [object setObject:@YES forKey:@"isLoved"];
+                [object setObject:@YES forKey:@"isFollowed"];
                 [object pinInBackground];
                 
                 PFACL *ACL = [PFACL ACL];
@@ -103,7 +101,7 @@
                 PFObject *LoveObject = [PFObject objectWithClassName:@"Love"];
                 [LoveObject setObject:_helpBuyObject forKey:@"helpBuy"];
                 [LoveObject setObject:[PFUser currentUser] forKey:@"user"];
-                [LoveObject setObject:@YES forKey:@"isLoved"];
+                [LoveObject setObject:@YES forKey:@"isFollowed"];
                 [LoveObject pinInBackground];
                 
                 PFACL *ACL = [PFACL ACL];

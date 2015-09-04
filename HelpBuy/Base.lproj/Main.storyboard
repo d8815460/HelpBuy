@@ -89,7 +89,7 @@
                                             </constraints>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rnl-pr-YRj">
-                                            <rect key="frame" x="523" y="56" width="35.5" height="21"/>
+                                            <rect key="frame" x="523.5" y="56" width="35.5" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="0hP-0C-CRk"/>
                                             </constraints>
@@ -201,7 +201,7 @@
             </objects>
             <point key="canvasLocation" x="2040" y="628"/>
         </scene>
-        <!--代買內容-->
+        <!--Help Buy Detail View Controller-->
         <scene sceneID="4PL-B4-5kY">
             <objects>
                 <viewController id="Eez-3G-SWb" customClass="HelpBuyDetailViewController" sceneMemberID="viewController">
@@ -232,7 +232,21 @@
                         </constraints>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="代買內容" id="D29-5I-dns">
+                    <navigationItem key="navigationItem" id="D29-5I-dns">
+                        <nil key="title"/>
+                        <view key="titleView" contentMode="scaleToFill" id="Jgl-Ib-MVr">
+                            <rect key="frame" x="180" y="5.5" width="240" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="代買內容" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T65-3b-HCl">
+                                    <rect key="frame" x="0.0" y="0.0" width="240" height="33"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </view>
                         <barButtonItem key="rightBarButtonItem" title="追蹤" id="Oed-uK-NUc">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </barButtonItem>
@@ -582,6 +596,6 @@
         <image name="setting" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="dnu-nC-09d"/>
+        <segue reference="ZH5-qE-Fz8"/>
     </inferredMetricsTieBreakers>
 </document>
