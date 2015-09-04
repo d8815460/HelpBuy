@@ -315,4 +315,23 @@ static AppDelegate *sharedDelegate;
     [self presentToLoginPage];
 }
 
+//取得現在Tabbar的badge數量
+- (NSNumber *)getTabbarBadgeNumber {
+    UITabBarController *tabController = (UITabBarController *)self.window.rootViewController;
+    NSNumber *number = [NSNumber numberWithInt:[[[tabController.viewControllers objectAtIndex:1] tabBarItem].badgeValue intValue]];
+    return number;
+}
+
+//Tabbar的追蹤 badge +1
+- (void)addTabBarBadge:(NSNumber *)number {
+    UITabBarController *tabController = (UITabBarController *)self.window.rootViewController;
+    [[tabController.viewControllers objectAtIndex:1] tabBarItem].badgeValue = [NSString stringWithFormat:@"%@", number];
+}
+
+//清空Tabbar的數值
+- (void)deleteTabBarBadge {
+    UITabBarController *tabController = (UITabBarController *)self.window.rootViewController;
+    [[tabController.viewControllers objectAtIndex:1] tabBarItem].badgeValue = nil;
+}
+
 @end

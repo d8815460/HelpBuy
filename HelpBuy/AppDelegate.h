@@ -33,5 +33,14 @@
 
 //登出
 - (void)logOut;
+
+//取得現在Tabbar的badge數量
+- (NSNumber *)getTabbarBadgeNumber;
+
+//Tabbar的追蹤 badge +1
+- (void)addTabBarBadge:(NSNumber *)number;
+
+//清空Tabbar的數值
+- (void)deleteTabBarBadge;
 @end
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2316018A1B99D237007ED6A1 /* MyLoveHelpBuyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 231601891B99D237007ED6A1 /* MyLoveHelpBuyTableViewController.m */; };
 		236EED411B9483FF0067B2F1 /* CMCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 236EED3A1B9483FF0067B2F1 /* CMCache.m */; };
 		236EED421B9483FF0067B2F1 /* CMConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 236EED3C1B9483FF0067B2F1 /* CMConstants.m */; };
 		236EED431B9483FF0067B2F1 /* CMUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 236EED3E1B9483FF0067B2F1 /* CMUtility.m */; };
@@ -47,6 +48,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		231601881B99D237007ED6A1 /* MyLoveHelpBuyTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLoveHelpBuyTableViewController.h; sourceTree = "<group>"; };
+		231601891B99D237007ED6A1 /* MyLoveHelpBuyTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLoveHelpBuyTableViewController.m; sourceTree = "<group>"; };
 		236EED391B9483FF0067B2F1 /* CMCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMCache.h; sourceTree = "<group>"; };
 		236EED3A1B9483FF0067B2F1 /* CMCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMCache.m; sourceTree = "<group>"; };
 		236EED3B1B9483FF0067B2F1 /* CMConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMConstants.h; sourceTree = "<group>"; };
@@ -123,6 +126,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		231601871B99D209007ED6A1 /* 訂閱追蹤 */ = {
+			isa = PBXGroup;
+			children = (
+				231601881B99D237007ED6A1 /* MyLoveHelpBuyTableViewController.h */,
+				231601891B99D237007ED6A1 /* MyLoveHelpBuyTableViewController.m */,
+			);
+			name = "訂閱追蹤";
+			sourceTree = "<group>";
+		};
 		236EED381B9483EA0067B2F1 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -242,6 +254,7 @@
 				236EED461B9485190067B2F1 /* 常用的Library */,
 				236EED381B9483EA0067B2F1 /* Utils */,
 				23F2A4591B97253000D2B8E6 /* 代買 */,
+				231601871B99D209007ED6A1 /* 訂閱追蹤 */,
 				23D7DA811B7733D6001A127A /* AppDelegate.h */,
 				23D7DA821B7733D6001A127A /* AppDelegate.m */,
 				23D7DA871B7733D6001A127A /* ViewController.h */,
@@ -364,7 +377,7 @@
 				TargetAttributes = {
 					23D7DA791B7733D6001A127A = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = CHX656NT89;
+						DevelopmentTeam = D3QVFELAEF;
 					};
 					23D7DA951B7733D7001A127A = {
 						CreatedOnToolsVersion = 6.4;
@@ -472,6 +485,7 @@
 				236EED6C1B9485190067B2F1 /* UIImage+Utils.m in Sources */,
 				236EED721B9489E70067B2F1 /* MainTableViewController.m in Sources */,
 				236EED6E1B9485190067B2F1 /* UuidLib.m in Sources */,
+				2316018A1B99D237007ED6A1 /* MyLoveHelpBuyTableViewController.m in Sources */,
 				236EED431B9483FF0067B2F1 /* CMUtility.m in Sources */,
 				236EED441B9483FF0067B2F1 /* Utils.m in Sources */,
 				236EED6D1B9485190067B2F1 /* UISwipe4ScrollGestureRecognizer.m in Sources */,
@@ -616,6 +630,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "2e30788a-e717-4b1b-baae-241729fa70a9";
 			};
 			name = Debug;
 		};
@@ -630,6 +645,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "2e30788a-e717-4b1b-baae-241729fa70a9";
 			};
 			name = Release;
 		};

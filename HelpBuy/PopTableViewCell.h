@@ -16,4 +16,9 @@
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 @property (strong, nonatomic) IBOutlet UILabel *timeLabel;
 @property (strong, nonatomic) IBOutlet UILabel *categoryLabel;
+@property (strong, nonatomic) IBOutlet UIButton *isLovedButton;
+@property (strong, nonatomic) PFObject *helpBuyObject;
+
+- (IBAction)iLoveThisHelpBuy:(id)sender;
+
 @end

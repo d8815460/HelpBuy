@@ -1,29 +1,28 @@
 //
-//  MainTableViewController.m
+//  MyLoveHelpBuyTableViewController.m
 //  HelpBuy
 //
-//  Created by 駿逸 陳 on 2015/8/31.
+//  Created by 駿逸 陳 on 2015/9/4.
 //  Copyright (c) 2015年 駿逸 陳. All rights reserved.
 //
 
-#import "MainTableViewController.h"
-#import "Canvas.h"
+#import "MyLoveHelpBuyTableViewController.h"
+#import "TTTTimeIntervalFormatter.h"
 #import "PopTableViewCell.h"
 #import "HelpBuyDetailViewController.h"
-#import "TTTTimeIntervalFormatter.h"
 
 static TTTTimeIntervalFormatter *timeFormatter;
 
-@interface MainTableViewController ()
+@interface MyLoveHelpBuyTableViewController ()
 
 @end
 
-@implementation MainTableViewController
+@implementation MyLoveHelpBuyTableViewController
 
 - (instancetype)initWithStyle:(UITableViewStyle)style {
     self = [super initWithStyle:style];
     if (self) { // This table displays items in the Todo class
-        self.parseClassName = @"HelpBuy";
+        self.parseClassName = @"Love";
         self.pullToRefreshEnabled = YES;
         self.paginationEnabled = YES;
         self.objectsPerPage = 25;
@@ -34,14 +33,13 @@ static TTTTimeIntervalFormatter *timeFormatter;
 - (instancetype)initWithCoder:(NSCoder *)aDecoder{
     self = [super initWithCoder:aDecoder];
     if (self) {
-        self.parseClassName = @"HelpBuy";
+        self.parseClassName = @"Love";
         self.pullToRefreshEnabled = YES;
         self.paginationEnabled = YES;
         self.objectsPerPage = 25;
     }
     return self;
 }
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -52,6 +50,18 @@ static TTTTimeIntervalFormatter *timeFormatter;
     }
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self loadObjects];
+    
+    //清空Tabbar的數值
+    [[AppDelegate sharedDelegate] deleteTabBarBadge];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -59,40 +69,25 @@ static TTTTimeIntervalFormatter *timeFormatter;
 
 - (PFQuery *)queryForTable {
     PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
-    [query whereKey:@"category" notEqualTo:@"推薦"];
-    [query whereKey:@"category" notEqualTo:@"公告"];
-    [query whereKey:@"category" notEqualTo:@"問題"];
-    [query whereKey:@"category" notEqualTo:@"板務"];
-    [query whereKey:@"category" notEqualTo:@"情報"];
-    [query whereKey:@"category" notEqualTo:@"檢舉"];
-    [query whereKey:@"category" notEqualTo:@"參選"];
+    [query includeKey:@"helpBuy"];
+    [query whereKey:@"isLoved" equalTo:@YES];
+    [query fromLocalDatastore];
     
-    [query orderByDescending:@"postDate"];
+    [query orderByDescending:@"updatedAt"];
     
     return query;
 }
 
 - (void)objectsDidLoad:(nullable NSError *)error {
     [super objectsDidLoad:error];
-    
-    PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
-    [query whereKey:@"category" notEqualTo:@"推薦"];
-    [query whereKey:@"category" notEqualTo:@"公告"];
-    [query whereKey:@"category" notEqualTo:@"問題"];
-    [query whereKey:@"category" notEqualTo:@"板務"];
-    [query whereKey:@"category" notEqualTo:@"情報"];
-    [query whereKey:@"category" notEqualTo:@"檢舉"];
-    [query whereKey:@"category" notEqualTo:@"參選"];
-    [query countObjectsInBackgroundWithBlock:^(int number, NSError *error) {
-        self.mainTitleLabel.text = [NSString stringWithFormat:@"共%i筆代買資訊", number];
-    }];
 }
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if (indexPath.row < self.objects.count) {
-        PFObject *object = [self objectAtIndexPath:indexPath];
+        PFObject *object = [[self objectAtIndexPath:indexPath] objectForKey:@"helpBuy"];
         PopTableViewCell *cell = (PopTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
         [cell startCanvasAnimation];
         
@@ -118,18 +113,18 @@ static TTTTimeIntervalFormatter *timeFormatter;
     PopTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (!cell) {
         cell = [[PopTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
-                                      reuseIdentifier:cellIdentifier];
+                                       reuseIdentifier:cellIdentifier];
     }
-
-    // Configure the cell to show todo item with a priority at the bottom
-    cell.titleLabel.text = object[@"title"];
-    cell.categoryLabel.text = object[@"category"];
-    [cell.timeLabel setText:[timeFormatter stringForTimeIntervalFromDate:[NSDate date] toDate:[object objectForKey:@"postDate"]]];
     
-    cell.helpBuyObject = object;
+    // Configure the cell to show todo item with a priority at the bottom
+    cell.titleLabel.text = [object objectForKey:@"helpBuy"][@"title"];
+    cell.categoryLabel.text = [object objectForKey:@"helpBuy"][@"category"];
+    [cell.timeLabel setText:[timeFormatter stringForTimeIntervalFromDate:[NSDate date] toDate:[[object objectForKey:@"helpBuy"] objectForKey:@"postDate"]]];
+    
+    cell.helpBuyObject = [object objectForKey:@"helpBuy"];
     
     PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
-    [query whereKey:@"objectId" equalTo:object.objectId];
+    [query whereKey:@"objectId" equalTo:[[object objectForKey:@"helpBuy"] objectId]];
     [query fromLocalDatastore];
     [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
         if (object) {
@@ -142,9 +137,6 @@ static TTTTimeIntervalFormatter *timeFormatter;
             }else{
                 [cell.isLovedButton setSelected:false];
             }
-        }else{
-            cell.isSelectView.alpha = 1.0;
-            [cell.isLovedButton setSelected:false];
         }
     }];
     
@@ -160,7 +152,6 @@ static TTTTimeIntervalFormatter *timeFormatter;
     }
     return 44.0f;
 }
-
 
 #pragma mark - Navigation
 
