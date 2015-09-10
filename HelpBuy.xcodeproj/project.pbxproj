@@ -630,7 +630,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2e30788a-e717-4b1b-baae-241729fa70a9";
+				PROVISIONING_PROFILE = "caa04a1d-9672-4ca9-94d2-06f5e20ab1ac";
 			};
 			name = Debug;
 		};
@@ -639,13 +639,13 @@
 			baseConfigurationReference = 9A63B7808991CF1A44AB6D09 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Throughtek Co., Ltd.";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/HelpBuyTests/PrefixHeader.pch";
 				INFOPLIST_FILE = HelpBuy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2e30788a-e717-4b1b-baae-241729fa70a9";
+				PROVISIONING_PROFILE = "caa04a1d-9672-4ca9-94d2-06f5e20ab1ac";
 			};
 			name = Release;
 		};
