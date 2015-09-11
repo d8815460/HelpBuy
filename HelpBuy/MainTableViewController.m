@@ -52,6 +52,10 @@ static TTTTimeIntervalFormatter *timeFormatter;
     }
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    NSLog(@"my category = %@", [PFUser currentUser]);
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -194,6 +198,9 @@ static TTTTimeIntervalFormatter *timeFormatter;
     return 44.0f;
 }
 
+- (IBAction)categoryButtonPressed:(id)sender {
+    [self performSegueWithIdentifier:@"category" sender:nil];
+}
 
 #pragma mark - Navigation
 
@@ -204,8 +211,11 @@ static TTTTimeIntervalFormatter *timeFormatter;
     if ([segue.identifier isEqualToString:@"helpBuyDetail"]) {
         HelpBuyDetailViewController *viewController = [segue destinationViewController];
         viewController.helpBuyObject = (PFObject *)sender;
+    }else if ([segue.identifier isEqualToString:@"category"]) {
+        
     }
 }
+
 
 
 @end

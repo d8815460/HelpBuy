@@ -18,6 +18,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *categoryLabel;
 @property (strong, nonatomic) IBOutlet UIButton *isLovedButton;
 @property (strong, nonatomic) PFObject *helpBuyObject;
+@property (strong, nonatomic) IBOutlet UILabel *isSelectedLabel;
 
 - (IBAction)iLoveThisHelpBuy:(id)sender;
 

@@ -386,7 +386,7 @@ extern NSString *const UploadDataNoti;
 extern BOOL isFromPostTaskFlow;
 extern BOOL hasCenterButton;
 
-// ***************** 用戶的基本資料 ****************************
+// ***************** 用戶的基本資料 *************************
 extern NSUserDefaults *userDefaults;
 
 // ***************** 餐廳的類別 ****************************

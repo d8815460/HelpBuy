@@ -11,5 +11,7 @@
 @interface MainTableViewController : PFQueryTableViewController
 
 @property (weak, nonatomic) IBOutlet UILabel *mainTitleLabel;
+@property (strong, nonatomic) IBOutlet UIButton *categoryButton;
 
+- (IBAction)categoryButtonPressed:(id)sender;
 @end
