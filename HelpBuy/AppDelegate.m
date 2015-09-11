@@ -109,6 +109,8 @@ static AppDelegate *sharedDelegate;
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
     [currentInstallation setDeviceTokenFromData:deviceToken];
+    NSArray *array = [[NSArray alloc] initWithObjects:[NSString stringWithFormat:@"user_%@", [[PFUser currentUser] objectId]], nil];
+    [currentInstallation setChannels:array];
     [currentInstallation saveEventually];
     
     [PFPush subscribeToChannelInBackground:@"" block:^(BOOL succeeded, NSError *error) {

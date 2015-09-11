@@ -72,7 +72,7 @@ static TTTTimeIntervalFormatter *timeFormatter;
     [query includeKey:@"helpBuy"];
     [query whereKey:@"isFollowed" equalTo:@YES];
     [query whereKey:@"user" equalTo:[PFUser currentUser]];
-    [query fromLocalDatastore];
+//    [query fromLocalDatastore];
     
     [query orderByDescending:@"updatedAt"];
     
@@ -96,7 +96,7 @@ static TTTTimeIntervalFormatter *timeFormatter;
         PFQuery *query = [PFQuery queryWithClassName:@"Love"];
         [query whereKey:@"helpBuy" equalTo:buyObject];
         [query whereKey:@"user" equalTo:[PFUser currentUser]];
-        [query fromLocalDatastore];
+//        [query fromLocalDatastore];
         [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
             if (object) {
                 if (![object objectForKey:@"isReaded"]) {
@@ -170,6 +170,13 @@ static TTTTimeIntervalFormatter *timeFormatter;
             }
         }
     }];
+    
+    if (indexPath.row < self.objects.count) {
+        
+    } else if (self.paginationEnabled) {
+        // load more
+        [self loadNextPage];
+    }
     
     return cell;
 }
