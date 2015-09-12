@@ -393,3 +393,4 @@ extern NSUserDefaults *userDefaults;
 extern NSArray *categoriesForRestaurant;
 
 
+extern PFObject *myPreCategory;

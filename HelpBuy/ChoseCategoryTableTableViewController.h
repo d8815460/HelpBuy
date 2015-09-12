@@ -7,9 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+@class ChoseCategoryTableTableViewController;
+
+@protocol ChoseCategoryTableTableViewControllerDelegate <NSObject>
+
+- (void)didSelectedCategory:(ChoseCategoryTableTableViewController *)controller Category:(NSString *)category;
+
+@end
 
 @interface ChoseCategoryTableTableViewController : UITableViewController
 @property (nonatomic, retain) NSArray* items;
-@property (nonatomic, strong) PFObject *myPreCategory;
-
+@property (nonatomic, weak) id <ChoseCategoryTableTableViewControllerDelegate> delegate;
 @end

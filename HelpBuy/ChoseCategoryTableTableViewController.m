@@ -16,7 +16,7 @@
 
 @implementation ChoseCategoryTableTableViewController
 @synthesize items = _items;
-@synthesize myPreCategory = _myPreCategory;
+@synthesize delegate;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -47,6 +47,7 @@
      外國     isFor   17
      徵求     isAsk   18
      推薦     isRec   19
+     不拘     isAll   20
      //結束
      */
     
@@ -57,8 +58,10 @@
     //先讀取本機資料
     if ([PFUser currentUser]) {
         //就新增
-        _myPreCategory = [PFObject objectWithClassName:@"_User"];
+        myPreCategory = [PFObject objectWithClassName:@"LocalCurrentUser"];
+        [myPreCategory setObject:[PFUser currentUser] forKey:@"user"];
         
+        [self myCategory:@"isAll"];
         [self myCategory:@"isTWN"];
         [self myCategory:@"isUSA"];
         [self myCategory:@"isJPN"];
@@ -87,34 +90,36 @@
 
 - (void) myCategory:(NSString *)category {
     if ([[PFUser currentUser] objectForKey:category] != Nil) {
-        [_myPreCategory setObject:[[PFUser currentUser] objectForKey:category] forKey:category];
+        [myPreCategory setObject:[[PFUser currentUser] objectForKey:category] forKey:category];
     }else{
-        [_myPreCategory setObject:@NO forKey:category];
+        [myPreCategory setObject:@NO forKey:category];
     }
 }
 
 - (void) clearMyCategory {
-    [_myPreCategory setObject:@NO forKey:@"isTWN"];
-    [_myPreCategory setObject:@NO forKey:@"isUSA"];
-    [_myPreCategory setObject:@NO forKey:@"isJPN"];
-    [_myPreCategory setObject:@NO forKey:@"isCHN"];
-    [_myPreCategory setObject:@NO forKey:@"isHKG"];
-    [_myPreCategory setObject:@NO forKey:@"isKOR"];
-    [_myPreCategory setObject:@NO forKey:@"isTHA"];
-    [_myPreCategory setObject:@NO forKey:@"isSGP"];
-    [_myPreCategory setObject:@NO forKey:@"isMYS"];
-    [_myPreCategory setObject:@NO forKey:@"isNZL"];
-    [_myPreCategory setObject:@NO forKey:@"isVNM"];
-    [_myPreCategory setObject:@NO forKey:@"isDEU"];
-    [_myPreCategory setObject:@NO forKey:@"isFRA"];
-    [_myPreCategory setObject:@NO forKey:@"isGBR"];
-    [_myPreCategory setObject:@NO forKey:@"isEU"];
-    [_myPreCategory setObject:@NO forKey:@"isAUS"];
-    [_myPreCategory setObject:@NO forKey:@"isAFR"];
-    [_myPreCategory setObject:@NO forKey:@"isFor"];
-    [_myPreCategory setObject:@NO forKey:@"isAsk"];
-    [_myPreCategory setObject:@NO forKey:@"isRec"];
+    [myPreCategory setObject:@NO forKey:@"isAll"];
+    [myPreCategory setObject:@NO forKey:@"isTWN"];
+    [myPreCategory setObject:@NO forKey:@"isUSA"];
+    [myPreCategory setObject:@NO forKey:@"isJPN"];
+    [myPreCategory setObject:@NO forKey:@"isCHN"];
+    [myPreCategory setObject:@NO forKey:@"isHKG"];
+    [myPreCategory setObject:@NO forKey:@"isKOR"];
+    [myPreCategory setObject:@NO forKey:@"isTHA"];
+    [myPreCategory setObject:@NO forKey:@"isSGP"];
+    [myPreCategory setObject:@NO forKey:@"isMYS"];
+    [myPreCategory setObject:@NO forKey:@"isNZL"];
+    [myPreCategory setObject:@NO forKey:@"isVNM"];
+    [myPreCategory setObject:@NO forKey:@"isDEU"];
+    [myPreCategory setObject:@NO forKey:@"isFRA"];
+    [myPreCategory setObject:@NO forKey:@"isGBR"];
+    [myPreCategory setObject:@NO forKey:@"isEU"];
+    [myPreCategory setObject:@NO forKey:@"isAUS"];
+    [myPreCategory setObject:@NO forKey:@"isAFR"];
+    [myPreCategory setObject:@NO forKey:@"isFor"];
+    [myPreCategory setObject:@NO forKey:@"isAsk"];
+    [myPreCategory setObject:@NO forKey:@"isRec"];
     
+    [[PFUser currentUser] setObject:@NO forKey:@"isAll"];
     [[PFUser currentUser] setObject:@NO forKey:@"isTWN"];
     [[PFUser currentUser] setObject:@NO forKey:@"isUSA"];
     [[PFUser currentUser] setObject:@NO forKey:@"isJPN"];
@@ -151,7 +156,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 20;
+    return 21;
 }
 
 
@@ -166,102 +171,107 @@
     }
     
     if (indexPath.row == 0) {
-        [self cellObject:cell isSelected:[[_myPreCategory objectForKey:@"isTWN"] boolValue]];
+        [self cellObject:cell isSelected:[[myPreCategory objectForKey:@"isAll"] boolValue]];
+        cell.titleLabel.text = @"不限地區";
+        cell.categoryLabel.text = @"不拘";
+    }
+    if (indexPath.row == 1) {
+        [self cellObject:cell isSelected:[[myPreCategory objectForKey:@"isTWN"] boolValue]];
         cell.titleLabel.text = @"台灣地區";
         cell.categoryLabel.text = @"代買";
     }
-    if (indexPath.row == 1) {
-        [self cellObject:cell isSelected:[[_myPreCategory objectForKey:@"isUSA"] boolValue]];
+    if (indexPath.row == 2) {
+        [self cellObject:cell isSelected:[[myPreCategory objectForKey:@"isUSA"] boolValue]];
         cell.titleLabel.text = @"美國地區";
         cell.categoryLabel.text = @"美國";
     }
-    if (indexPath.row == 2) {
-        [self cellObject:cell isSelected:[[_myPreCategory objectForKey:@"isJPN"] boolValue]];
+    if (indexPath.row == 3) {
+        [self cellObject:cell isSelected:[[myPreCategory objectForKey:@"isJPN"] boolValue]];
         cell.titleLabel.text = @"日本地區";
         cell.categoryLabel.text = @"日本";
     }
-    if (indexPath.row == 3) {
-        [self cellObject:cell isSelected:[[_myPreCategory objectForKey:@"isCHN"] boolValue]];
+    if (indexPath.row == 4) {
+        [self cellObject:cell isSelected:[[myPreCategory objectForKey:@"isCHN"] boolValue]];
         cell.titleLabel.text = @"中國地區";
         cell.categoryLabel.text = @"中國";
     }
-    if (indexPath.row == 4) {
-        [self cellObject:cell isSelected:[[_myPreCategory objectForKey:@"isHKG"] boolValue]];
+    if (indexPath.row == 5) {
+        [self cellObject:cell isSelected:[[myPreCategory objectForKey:@"isHKG"] boolValue]];
         cell.titleLabel.text = @"香港地區";
         cell.categoryLabel.text = @"香港";
     }
-    if (indexPath.row == 5) {
-        [self cellObject:cell isSelected:[[_myPreCategory objectForKey:@"isKOR"] boolValue]];
+    if (indexPath.row == 6) {
+        [self cellObject:cell isSelected:[[myPreCategory objectForKey:@"isKOR"] boolValue]];
         cell.titleLabel.text = @"韓國地區";
         cell.categoryLabel.text = @"韓國";
     }
-    if (indexPath.row == 6) {
-        [self cellObject:cell isSelected:[[_myPreCategory objectForKey:@"isTHA"] boolValue]];
+    if (indexPath.row == 7) {
+        [self cellObject:cell isSelected:[[myPreCategory objectForKey:@"isTHA"] boolValue]];
         cell.titleLabel.text = @"泰國地區";
         cell.categoryLabel.text = @"泰國";
     }
-    if (indexPath.row == 7) {
-        [self cellObject:cell isSelected:[[_myPreCategory objectForKey:@"isSGP"] boolValue]];
+    if (indexPath.row == 8) {
+        [self cellObject:cell isSelected:[[myPreCategory objectForKey:@"isSGP"] boolValue]];
         cell.titleLabel.text = @"新加坡地區";
         cell.categoryLabel.text = @"新加坡";
     }
-    if (indexPath.row == 8) {
-        [self cellObject:cell isSelected:[[_myPreCategory objectForKey:@"isMYS"] boolValue]];
+    if (indexPath.row == 9) {
+        [self cellObject:cell isSelected:[[myPreCategory objectForKey:@"isMYS"] boolValue]];
         cell.titleLabel.text = @"馬來西亞地區";
         cell.categoryLabel.text = @"買來西亞";
     }
-    if (indexPath.row == 9) {
-        [self cellObject:cell isSelected:[[_myPreCategory objectForKey:@"isNZL"] boolValue]];
+    if (indexPath.row == 10) {
+        [self cellObject:cell isSelected:[[myPreCategory objectForKey:@"isNZL"] boolValue]];
         cell.titleLabel.text = @"紐西蘭地區";
         cell.categoryLabel.text = @"紐西蘭";
     }
-    if (indexPath.row == 10) {
-        [self cellObject:cell isSelected:[[_myPreCategory objectForKey:@"isVNM"] boolValue]];
+    if (indexPath.row == 11) {
+        [self cellObject:cell isSelected:[[myPreCategory objectForKey:@"isVNM"] boolValue]];
         cell.titleLabel.text = @"越南地區";
         cell.categoryLabel.text = @"越南";
     }
-    if (indexPath.row == 11) {
-        [self cellObject:cell isSelected:[[_myPreCategory objectForKey:@"isDEU"] boolValue]];
+    if (indexPath.row == 12) {
+        [self cellObject:cell isSelected:[[myPreCategory objectForKey:@"isDEU"] boolValue]];
         cell.titleLabel.text = @"德國地區";
         cell.categoryLabel.text = @"德國";
     }
-    if (indexPath.row == 12) {
-        [self cellObject:cell isSelected:[[_myPreCategory objectForKey:@"isFRA"] boolValue]];
+    if (indexPath.row == 13) {
+        [self cellObject:cell isSelected:[[myPreCategory objectForKey:@"isFRA"] boolValue]];
         cell.titleLabel.text = @"法國地區";
         cell.categoryLabel.text = @"法國";
     }
-    if (indexPath.row == 13) {
-        [self cellObject:cell isSelected:[[_myPreCategory objectForKey:@"isGBR"] boolValue]];
+    if (indexPath.row == 14) {
+        [self cellObject:cell isSelected:[[myPreCategory objectForKey:@"isGBR"] boolValue]];
         cell.titleLabel.text = @"英國地區";
         cell.categoryLabel.text = @"英國";
     }
-    if (indexPath.row == 14) {
-        [self cellObject:cell isSelected:[[_myPreCategory objectForKey:@"isEU"] boolValue]];
+    if (indexPath.row == 15) {
+        [self cellObject:cell isSelected:[[myPreCategory objectForKey:@"isEU"] boolValue]];
         cell.titleLabel.text = @"歐洲地區";
         cell.categoryLabel.text = @"歐洲";
     }
-    if (indexPath.row == 15) {
-        [self cellObject:cell isSelected:[[_myPreCategory objectForKey:@"isAUS"] boolValue]];
+    if (indexPath.row == 16) {
+        [self cellObject:cell isSelected:[[myPreCategory objectForKey:@"isAUS"] boolValue]];
         cell.titleLabel.text = @"澳洲地區";
         cell.categoryLabel.text = @"澳洲";
     }
-    if (indexPath.row == 16) {
-        [self cellObject:cell isSelected:[[_myPreCategory objectForKey:@"isAFR"] boolValue]];
+    if (indexPath.row == 17) {
+        [self cellObject:cell isSelected:[[myPreCategory objectForKey:@"isAFR"] boolValue]];
         cell.titleLabel.text = @"非洲地區";
         cell.categoryLabel.text = @"非洲";
     }
-    if (indexPath.row == 17) {
-        [self cellObject:cell isSelected:[[_myPreCategory objectForKey:@"isFor"] boolValue]];
+    if (indexPath.row == 18) {
+        [self cellObject:cell isSelected:[[myPreCategory objectForKey:@"isFor"] boolValue]];
         cell.titleLabel.text = @"外國地區";
         cell.categoryLabel.text = @"外國";
     }
-    if (indexPath.row == 18) {
-        [self cellObject:cell isSelected:[[_myPreCategory objectForKey:@"isAsk"] boolValue]];
+    if (indexPath.row == 19) {
+        [self cellObject:cell isSelected:[[myPreCategory objectForKey:@"isAsk"] boolValue]];
         cell.titleLabel.text = @"買家徵求代買";
         cell.categoryLabel.text = @"徵求";
     }
-    if (indexPath.row == 19) {
-        [self cellObject:cell isSelected:[[_myPreCategory objectForKey:@"isRec"] boolValue]];
+    if (indexPath.row == 20) {
+        [self cellObject:cell isSelected:[[myPreCategory objectForKey:@"isRec"] boolValue]];
         cell.titleLabel.text = @"買家推薦優良代買者";
         cell.categoryLabel.text = @"推薦";
     }
@@ -286,7 +296,7 @@
     
     PopTableViewCell *cell;
 
-    for (int i = 0; i < 20; i++) {
+    for (int i = 0; i < 21; i++) {
         NSIndexPath *index = [NSIndexPath indexPathForRow:(NSInteger)i inSection:0];
         cell = (PopTableViewCell *)[tableView cellForRowAtIndexPath:index];
         [[(PopTableViewCell *)cell isSelectedLabel] setHidden:YES];
@@ -303,14 +313,11 @@
     [ACL setPublicReadAccess:YES];
     [PFUser currentUser].ACL = ACL;
     
-    
-    
     [[PFUser currentUser] saveEventually:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             [[PFUser currentUser] refreshInBackgroundWithBlock:^(PFObject *object, NSError *error) {
                 if (!error) {
-                    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                    [self.navigationController popViewControllerAnimated:YES];
+                    
                 }else{
                     // error
                 }
@@ -320,71 +327,107 @@
             NSLog(@"%@", error.debugDescription);
         }
     }];
+    
+    [myPreCategory pinInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+            [self.navigationController popViewControllerAnimated:YES];
+            [self.delegate didSelectedCategory:self Category:[userDefaults objectForKey:@"myCategory"]];
+        }
+    }];
 }
 
 - (void)categoryCell:(PopTableViewCell *)cell saveSelected:(BOOL)Selected AtIndex:(NSIndexPath *)indexPath{
     // Configure the cell...
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     if (indexPath.row == 0) {
-        [_myPreCategory setObject:[NSNumber numberWithBool:Selected] forKey:@"isTWN"];
+        [myPreCategory setObject:[NSNumber numberWithBool:Selected] forKey:@"isAll"];
+        [[PFUser currentUser] setObject:@YES forKey:@"isAll"];
+        [userDefaults  setObject:@"" forKey:@"myCategory"];
+    }else if (indexPath.row == 1) {
+        [myPreCategory setObject:[NSNumber numberWithBool:Selected] forKey:@"isTWN"];
         [[PFUser currentUser] setObject:@YES forKey:@"isTWN"];
-    }else if (indexPath.row == 1){
-        [_myPreCategory setObject:[NSNumber numberWithBool:Selected] forKey:@"isUSA"];
-        [[PFUser currentUser] setObject:@YES forKey:@"isUSA"];
+        [userDefaults  setObject:@"代買" forKey:@"myCategory"];
     }else if (indexPath.row == 2){
-        [_myPreCategory setObject:[NSNumber numberWithBool:Selected] forKey:@"isJPN"];
-        [[PFUser currentUser] setObject:@YES forKey:@"isJPN"];
+        [myPreCategory setObject:[NSNumber numberWithBool:Selected] forKey:@"isUSA"];
+        [[PFUser currentUser] setObject:@YES forKey:@"isUSA"];
+        [userDefaults  setObject:@"美國" forKey:@"myCategory"];
     }else if (indexPath.row == 3){
-        [_myPreCategory setObject:[NSNumber numberWithBool:Selected] forKey:@"isCHN"];
-        [[PFUser currentUser] setObject:@YES forKey:@"isCHN"];
+        [myPreCategory setObject:[NSNumber numberWithBool:Selected] forKey:@"isJPN"];
+        [[PFUser currentUser] setObject:@YES forKey:@"isJPN"];
+        [userDefaults  setObject:@"日本" forKey:@"myCategory"];
     }else if (indexPath.row == 4){
-        [_myPreCategory setObject:[NSNumber numberWithBool:Selected] forKey:@"isHKG"];
-        [[PFUser currentUser] setObject:@YES forKey:@"isHKG"];
+        [myPreCategory setObject:[NSNumber numberWithBool:Selected] forKey:@"isCHN"];
+        [[PFUser currentUser] setObject:@YES forKey:@"isCHN"];
+        [userDefaults  setObject:@"中國" forKey:@"myCategory"];
     }else if (indexPath.row == 5){
-        [_myPreCategory setObject:[NSNumber numberWithBool:Selected] forKey:@"isKOR"];
-        [[PFUser currentUser] setObject:@YES forKey:@"isKOR"];
+        [myPreCategory setObject:[NSNumber numberWithBool:Selected] forKey:@"isHKG"];
+        [[PFUser currentUser] setObject:@YES forKey:@"isHKG"];
+        [userDefaults  setObject:@"香港" forKey:@"myCategory"];
     }else if (indexPath.row == 6){
-        [_myPreCategory setObject:[NSNumber numberWithBool:Selected] forKey:@"isTHA"];
-        [[PFUser currentUser] setObject:@YES forKey:@"isTHA"];
+        [myPreCategory setObject:[NSNumber numberWithBool:Selected] forKey:@"isKOR"];
+        [[PFUser currentUser] setObject:@YES forKey:@"isKOR"];
+        [userDefaults  setObject:@"韓國" forKey:@"myCategory"];
     }else if (indexPath.row == 7){
-        [_myPreCategory setObject:[NSNumber numberWithBool:Selected] forKey:@"isSGP"];
-        [[PFUser currentUser] setObject:@YES forKey:@"isSGP"];
+        [myPreCategory setObject:[NSNumber numberWithBool:Selected] forKey:@"isTHA"];
+        [[PFUser currentUser] setObject:@YES forKey:@"isTHA"];
+        [userDefaults  setObject:@"泰國" forKey:@"myCategory"];
     }else if (indexPath.row == 8){
-        [_myPreCategory setObject:[NSNumber numberWithBool:Selected] forKey:@"isMYS"];
-        [[PFUser currentUser] setObject:@YES forKey:@"isMYS"];
+        [myPreCategory setObject:[NSNumber numberWithBool:Selected] forKey:@"isSGP"];
+        [[PFUser currentUser] setObject:@YES forKey:@"isSGP"];
+        [userDefaults  setObject:@"新加坡" forKey:@"myCategory"];
     }else if (indexPath.row == 9){
-        [_myPreCategory setObject:[NSNumber numberWithBool:Selected] forKey:@"isNZL"];
-        [[PFUser currentUser] setObject:@YES forKey:@"isNZL"];
+        [myPreCategory setObject:[NSNumber numberWithBool:Selected] forKey:@"isMYS"];
+        [[PFUser currentUser] setObject:@YES forKey:@"isMYS"];
+        [userDefaults  setObject:@"馬來西亞" forKey:@"myCategory"];
     }else if (indexPath.row == 10){
-        [_myPreCategory setObject:[NSNumber numberWithBool:Selected] forKey:@"isVNM"];
-        [[PFUser currentUser] setObject:@YES forKey:@"isVNM"];
+        [myPreCategory setObject:[NSNumber numberWithBool:Selected] forKey:@"isNZL"];
+        [[PFUser currentUser] setObject:@YES forKey:@"isNZL"];
+        [userDefaults  setObject:@"紐西蘭" forKey:@"myCategory"];
     }else if (indexPath.row == 11){
-        [_myPreCategory setObject:[NSNumber numberWithBool:Selected] forKey:@"isDEU"];
-        [[PFUser currentUser] setObject:@YES forKey:@"isDEU"];
+        [myPreCategory setObject:[NSNumber numberWithBool:Selected] forKey:@"isVNM"];
+        [[PFUser currentUser] setObject:@YES forKey:@"isVNM"];
+        [userDefaults  setObject:@"越南" forKey:@"myCategory"];
     }else if (indexPath.row == 12){
-        [_myPreCategory setObject:[NSNumber numberWithBool:Selected] forKey:@"isFRA"];
-        [[PFUser currentUser] setObject:@YES forKey:@"isFRA"];
+        [myPreCategory setObject:[NSNumber numberWithBool:Selected] forKey:@"isDEU"];
+        [[PFUser currentUser] setObject:@YES forKey:@"isDEU"];
+        [userDefaults  setObject:@"德國" forKey:@"myCategory"];
     }else if (indexPath.row == 13){
-        [_myPreCategory setObject:[NSNumber numberWithBool:Selected] forKey:@"isGBR"];
-        [[PFUser currentUser] setObject:@YES forKey:@"isGBR"];
+        [myPreCategory setObject:[NSNumber numberWithBool:Selected] forKey:@"isFRA"];
+        [[PFUser currentUser] setObject:@YES forKey:@"isFRA"];
+        [userDefaults  setObject:@"法國" forKey:@"myCategory"];
     }else if (indexPath.row == 14){
-        [_myPreCategory setObject:[NSNumber numberWithBool:Selected] forKey:@"isEU"];
-        [[PFUser currentUser] setObject:@YES forKey:@"isEU"];
+        [myPreCategory setObject:[NSNumber numberWithBool:Selected] forKey:@"isGBR"];
+        [[PFUser currentUser] setObject:@YES forKey:@"isGBR"];
+        [userDefaults  setObject:@"英國" forKey:@"myCategory"];
     }else if (indexPath.row == 15){
-        [_myPreCategory setObject:[NSNumber numberWithBool:Selected] forKey:@"isAUS"];
-        [[PFUser currentUser] setObject:@YES forKey:@"isAUS"];
+        [myPreCategory setObject:[NSNumber numberWithBool:Selected] forKey:@"isEU"];
+        [[PFUser currentUser] setObject:@YES forKey:@"isEU"];
+        [userDefaults  setObject:@"歐洲" forKey:@"myCategory"];
     }else if (indexPath.row == 16){
-        [_myPreCategory setObject:[NSNumber numberWithBool:Selected] forKey:@"isAFR"];
-        [[PFUser currentUser] setObject:@YES forKey:@"isAFR"];
+        [myPreCategory setObject:[NSNumber numberWithBool:Selected] forKey:@"isAUS"];
+        [[PFUser currentUser] setObject:@YES forKey:@"isAUS"];
+        [userDefaults  setObject:@"澳洲" forKey:@"myCategory"];
     }else if (indexPath.row == 17){
-        [_myPreCategory setObject:[NSNumber numberWithBool:Selected] forKey:@"isFor"];
-        [[PFUser currentUser] setObject:@YES forKey:@"isFor"];
+        [myPreCategory setObject:[NSNumber numberWithBool:Selected] forKey:@"isAFR"];
+        [[PFUser currentUser] setObject:@YES forKey:@"isAFR"];
+        [userDefaults  setObject:@"非洲" forKey:@"myCategory"];
     }else if (indexPath.row == 18){
-        [_myPreCategory setObject:[NSNumber numberWithBool:Selected] forKey:@"isAsk"];
-        [[PFUser currentUser] setObject:@YES forKey:@"isAsk"];
+        [myPreCategory setObject:[NSNumber numberWithBool:Selected] forKey:@"isFor"];
+        [[PFUser currentUser] setObject:@YES forKey:@"isFor"];
+        [userDefaults  setObject:@"外國" forKey:@"myCategory"];
     }else if (indexPath.row == 19){
-        [_myPreCategory setObject:[NSNumber numberWithBool:Selected] forKey:@"isRec"];
+        [myPreCategory setObject:[NSNumber numberWithBool:Selected] forKey:@"isAsk"];
+        [[PFUser currentUser] setObject:@YES forKey:@"isAsk"];
+        [userDefaults  setObject:@"徵求" forKey:@"myCategory"];
+    }else if (indexPath.row == 20){
+        [myPreCategory setObject:[NSNumber numberWithBool:Selected] forKey:@"isRec"];
         [[PFUser currentUser] setObject:@YES forKey:@"isRec"];
+        [userDefaults  setObject:@"推薦" forKey:@"myCategory"];
     }
+    
+    [userDefaults synchronize];
 }
 
 /*

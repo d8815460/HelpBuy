@@ -103,6 +103,13 @@ static AppDelegate *sharedDelegate;
     return [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
 }
 
+- (void) myCategory:(NSString *)category {
+    if ([[PFUser currentUser] objectForKey:category] != Nil) {
+        [myPreCategory setObject:[[PFUser currentUser] objectForKey:category] forKey:category];
+    }else{
+        [myPreCategory setObject:@NO forKey:category];
+    }
+}
 
 #pragma mark Push Notifications
 

@@ -7,11 +7,13 @@
 //
 
 #import "PFQueryTableViewController.h"
+#import "ChoseCategoryTableTableViewController.h"
 
-@interface MainTableViewController : PFQueryTableViewController
+@interface MainTableViewController : PFQueryTableViewController <ChoseCategoryTableTableViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *mainTitleLabel;
 @property (strong, nonatomic) IBOutlet UIButton *categoryButton;
+@property (strong, nonatomic) NSString *myCategory;
 
 - (IBAction)categoryButtonPressed:(id)sender;
 @end

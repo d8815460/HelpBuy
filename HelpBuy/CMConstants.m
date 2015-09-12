@@ -355,6 +355,7 @@ NSString *const UploadDataNoti =        @"UploadDataNoti";
 BOOL isFromPostTaskFlow;
 BOOL hasCenterButton;
 
+PFObject *myPreCategory;
 
 // ***************** 用戶的基本資料 ****************************
 NSUserDefaults *userDefaults;
