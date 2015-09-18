@@ -52,6 +52,10 @@ static TTTTimeIntervalFormatter *timeFormatter;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.searchBar.delegate = self;
+    
+    //初始化數據
+    self.dataList = [NSMutableArray arrayWithCapacity:100];
     
     if (!timeFormatter) {
         timeFormatter = [[TTTTimeIntervalFormatter alloc] init];
@@ -182,6 +186,11 @@ static TTTTimeIntervalFormatter *timeFormatter;
     if (self.myCategory.length > 0) {
         [query whereKey:@"category" equalTo:self.myCategory];
     }
+    
+    if (self.keyWords.length > 0) {
+        [query whereKey:@"content" containedIn:[NSArray arrayWithObject:self.keyWords]];
+    }
+    
     [query orderByDescending:@"postDate"];
     
     return query;
@@ -189,6 +198,12 @@ static TTTTimeIntervalFormatter *timeFormatter;
 
 - (void)objectsDidLoad:(nullable NSError *)error {
     [super objectsDidLoad:error];
+    
+    [MBProgressHUD hideAllHUDsForView:self.view animated:TRUE];
+    
+    self.dataList = [NSMutableArray arrayWithArray:self.objects];
+    [PFObject pinAllInBackground:self.objects];
+    
     
     PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
     [query whereKey:@"category" notEqualTo:@"推薦"];
@@ -203,8 +218,15 @@ static TTTTimeIntervalFormatter *timeFormatter;
         [query whereKey:@"category" equalTo:self.myCategory];
     }
     
-    [query countObjectsInBackgroundWithBlock:^(int number, NSError *error) {
-        self.mainTitleLabel.text = [NSString stringWithFormat:@"共%i筆代買資訊", number];
+    if (self.keyWords.length > 0) {
+        [query whereKey:@"content" containedIn:[NSArray arrayWithObject:self.keyWords]];
+    }
+    
+    [query countObjectsInBackgroundWithBlock:^(int number, NSError * _Nullable error) {
+        if (!error) {
+            self.mainTitleLabel.text = [NSString stringWithFormat:@"共%i筆代買資訊", number];
+        }
+        
     }];
 }
 
@@ -233,7 +255,6 @@ static TTTTimeIntervalFormatter *timeFormatter;
                     object.ACL = ACL;
                     [object saveEventually];
                 }
-                
             }else{
                 PFObject *SelectObject = [PFObject objectWithClassName:@"Love"];
                 [SelectObject setObject:@YES forKey:@"isReaded"];
@@ -262,9 +283,10 @@ static TTTTimeIntervalFormatter *timeFormatter;
     [cell startCanvasAnimation];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
-    
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellIdentifier = @"POPCell";
+    
+    NSLog(@"tableView = %@", tableView);
     
     PopTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (!cell) {
@@ -272,15 +294,23 @@ static TTTTimeIntervalFormatter *timeFormatter;
                                        reuseIdentifier:cellIdentifier];
     }
     
-    // Configure the cell to show todo item with a priority at the bottom
-    cell.titleLabel.text = object[@"title"];
-    cell.categoryLabel.text = object[@"category"];
-    [cell.timeLabel setText:[timeFormatter stringForTimeIntervalFromDate:[NSDate date] toDate:[object objectForKey:@"postDate"]]];
+    if([UISearchController class]){
+        //Create an UISearchController and add it to your UITableViewController
+        NSLog(@"1");
+    }else{
+        //Create an UISearchDisplayController and add it to your UITableViewController
+        NSLog(@"2");
+    }
     
-    cell.helpBuyObject = object; //Parse上的物件
+    // Configure the cell to show todo item with a priority at the bottom
+    cell.titleLabel.text = [self.objects objectAtIndex:indexPath.row][@"title"];
+    cell.categoryLabel.text = [self.objects objectAtIndex:indexPath.row][@"category"];
+    [cell.timeLabel setText:[timeFormatter stringForTimeIntervalFromDate:[NSDate date] toDate:[[self.objects objectAtIndex:indexPath.row] objectForKey:@"postDate"]]];
+    
+    cell.helpBuyObject = [self.objects objectAtIndex:indexPath.row]; //Parse上的物件
     
     PFQuery *query = [PFQuery queryWithClassName:@"Love"];
-    [query whereKey:@"helpBuy" equalTo:object];
+    [query whereKey:@"helpBuy" equalTo:[self.objects objectAtIndex:indexPath.row]];
     [query whereKey:@"user" equalTo:[PFUser currentUser]];
     [query fromLocalDatastore];
     [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
@@ -300,6 +330,56 @@ static TTTTimeIntervalFormatter *timeFormatter;
             [cell.isLovedButton setSelected:false];
         }
     }];
+    
+    return cell;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
+    
+    static NSString *cellIdentifier = @"POPCell";
+    
+    
+    
+    
+    PopTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (!cell) {
+        cell = [[PopTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
+                                       reuseIdentifier:cellIdentifier];
+    }
+    
+    if (tableView==self.searchDisplayController.searchResultsTableView) {
+        
+    }else{
+        // Configure the cell to show todo item with a priority at the bottom
+        cell.titleLabel.text = object[@"title"];
+        cell.categoryLabel.text = object[@"category"];
+        [cell.timeLabel setText:[timeFormatter stringForTimeIntervalFromDate:[NSDate date] toDate:[object objectForKey:@"postDate"]]];
+        
+        cell.helpBuyObject = object; //Parse上的物件
+        
+        PFQuery *query = [PFQuery queryWithClassName:@"Love"];
+        [query whereKey:@"helpBuy" equalTo:object];
+        [query whereKey:@"user" equalTo:[PFUser currentUser]];
+        [query fromLocalDatastore];
+        [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+            if (object) {
+                if ([[object objectForKey:@"isFollowed"] boolValue]) {
+                    [cell.isLovedButton setSelected:true];
+                }else{
+                    [cell.isLovedButton setSelected:false];
+                }
+                if ([[object objectForKey:@"isReaded"] boolValue]) {
+                    cell.isSelectView.alpha = 0.3;
+                }else{
+                    cell.isSelectView.alpha = 1.0;
+                }
+            }else{
+                cell.isSelectView.alpha = 1.0;
+                [cell.isLovedButton setSelected:false];
+            }
+        }];
+    }
+    
     
     return cell;
 }
@@ -338,6 +418,36 @@ static TTTTimeIntervalFormatter *timeFormatter;
     [self performSegueWithIdentifier:@"category" sender:nil];
 }
 
+#pragma mark - Search Delegate
+
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar{
+    NSLog(@"搜索Begin");
+    return YES;
+}
+
+- (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar{
+    NSLog(@"搜索End");
+    [self loadObjects];
+    
+    self.keyWords = @"";
+    return YES;
+}
+
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString{
+    // 谓词的包含语法,之前文章介绍过http://www.cnblogs.com/xiaofeixiang/
+    NSPredicate *preicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[c] %@", searchString];
+    self.keyWords = searchString;
+    
+    if (self.searchList!= nil) {
+        [self.searchList removeAllObjects];
+    }
+    //过滤数据
+//    self.searchList = [NSMutableArray arrayWithArray:[_dataList filteredArrayUsingPredicate:preicate]];
+    //刷新表格
+    return YES;
+}
+
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -357,7 +467,11 @@ static TTTTimeIntervalFormatter *timeFormatter;
 #pragma ChoseCategoryDelegate
 - (void)didSelectedCategory:(ChoseCategoryTableTableViewController *)controller Category:(NSString *)category{
     self.myCategory = category;
+    self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:TRUE];
+    self.hud.mode = MBProgressHUDModeAnnularDeterminate;
+    self.hud.labelText = @"努力載入中...";
     [self loadObjects];
 }
+
 
 @end
