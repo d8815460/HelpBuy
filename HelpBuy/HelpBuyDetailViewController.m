@@ -24,6 +24,20 @@
     [_detailTextView setFont:[UIFont systemFontOfSize:17]];
     _detailTextView.text = [_helpBuyObject objectForKey:@"content"];
     
+    PFQuery *myLoveQuery = [PFQuery queryWithClassName:@"Love"];
+    [myLoveQuery whereKey:@"user" equalTo:[PFUser currentUser]];
+    [myLoveQuery whereKey:@"helpBuy" equalTo:_helpBuyObject];
+    [myLoveQuery fromLocalDatastore];
+    [myLoveQuery getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+        if (!error) {
+            if ([[object objectForKey:@"isFollowed"] boolValue]) {
+                [self.followButton setTitle:@"不追蹤" forState:UIControlStateNormal];
+            }
+        }
+    }];
+    
+    self.userNameLabel.text = [NSString stringWithFormat:@"作者：%@", [_helpBuyObject objectForKey:@"author"]];
+    
     [self.navigationController.navigationItem.backBarButtonItem setTintColor:[UIColor whiteColor]];
 }
 

@@ -295,6 +295,7 @@
 				23F2A4591B97253000D2B8E6 /* 代買 */,
 				23E7096E1BAEB9C500942554 /* 搜尋table */,
 				231601871B99D209007ED6A1 /* 訂閱追蹤 */,
+				23FA047B1BAEFFA900954D57 /* 代買詳細內容 */,
 				23D7DA811B7733D6001A127A /* AppDelegate.h */,
 				23D7DA821B7733D6001A127A /* AppDelegate.m */,
 				23D7DA871B7733D6001A127A /* ViewController.h */,
@@ -354,10 +355,17 @@
 				236EED771B949CF70067B2F1 /* PopTableViewCell.m */,
 				236EED701B9489E70067B2F1 /* MainTableViewController.h */,
 				236EED711B9489E70067B2F1 /* MainTableViewController.m */,
+			);
+			name = "代買";
+			sourceTree = "<group>";
+		};
+		23FA047B1BAEFFA900954D57 /* 代買詳細內容 */ = {
+			isa = PBXGroup;
+			children = (
 				23F2A45A1B97257600D2B8E6 /* HelpBuyDetailViewController.h */,
 				23F2A45B1B97257600D2B8E6 /* HelpBuyDetailViewController.m */,
 			);
-			name = "代買";
+			name = "代買詳細內容";
 			sourceTree = "<group>";
 		};
 		38CBC3817578B2FCB08CA552 /* Frameworks */ = {
@@ -634,7 +642,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -671,7 +679,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;

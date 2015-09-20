@@ -12,5 +12,7 @@
 
 @property (strong, nonatomic) IBOutlet UITextView *detailTextView;
 @property (strong, nonatomic) PFObject *helpBuyObject;
+@property (weak, nonatomic) IBOutlet UIButton *followButton;
+@property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 
 @end

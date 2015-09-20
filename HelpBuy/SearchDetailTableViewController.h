@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SearchDetailTableViewController : UITableViewController
+@interface SearchDetailTableViewController : PFQueryTableViewController
 
 @property (nonatomic, strong) PFObject *searchKey;
 

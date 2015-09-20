@@ -57,7 +57,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     PFObject *searchKey = [self.searchResults objectAtIndex:indexPath.row];
     SearchDetailTableViewController *vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"SearchDetailViewController"];
-    self.presentingViewController.navigationItem.title = [NSString stringWithFormat:@"搜尋：%@", [searchKey objectForKey:@"name"]];
+    self.presentingViewController.navigationItem.title = [NSString stringWithFormat:@"搜尋：%@", [searchKey objectForKey:@"searchKey"]];
     vc.searchKey = searchKey;
     [self.presentingViewController.navigationController pushViewController:vc animated:YES];
 }
