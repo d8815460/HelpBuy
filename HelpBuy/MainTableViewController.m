@@ -12,11 +12,13 @@
 #import "HelpBuyDetailViewController.h"
 #import "TTTTimeIntervalFormatter.h"
 #import "ChoseCategoryTableTableViewController.h"
+#import "SearchResultsTableViewController.h"
 
 static TTTTimeIntervalFormatter *timeFormatter;
 
-@interface MainTableViewController ()
-
+@interface MainTableViewController () <UISearchResultsUpdating, UISearchBarDelegate>
+@property (nonatomic, strong) UISearchController *searchController;
+@property (nonatomic, strong) NSMutableArray *searchResults; // Filtered search results （歷史紀錄）
 @end
 
 @implementation MainTableViewController
@@ -51,8 +53,7 @@ static TTTTimeIntervalFormatter *timeFormatter;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    self.searchBar.delegate = self;
+    // Do any additional setup after loading the view
     
     //初始化數據
     self.dataList = [NSMutableArray arrayWithCapacity:100];
@@ -60,6 +61,40 @@ static TTTTimeIntervalFormatter *timeFormatter;
     if (!timeFormatter) {
         timeFormatter = [[TTTTimeIntervalFormatter alloc] init];
     }
+    
+    //歷史搜尋紀錄，LocalDB
+    // Create a mutable array to contain products for the search results table.
+    PFQuery *query = [PFQuery queryWithClassName:@"MySearch"];
+    [query whereKey:@"user" equalTo:[PFUser currentUser]];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            self.searchResults = (NSMutableArray *)objects;
+            [PFObject pinAllInBackground:objects];
+            
+        }else{
+            self.searchResults = [NSMutableArray arrayWithCapacity:25];
+        }
+    }];
+    
+    // The table view controller is in a nav controller, and so the containing nav controller is the 'search results controller'
+    UINavigationController *searchResultsController = [[self storyboard] instantiateViewControllerWithIdentifier:@"TableSearchResultsNavController"];
+    
+    self.searchController = [[UISearchController alloc] initWithSearchResultsController:searchResultsController];
+    
+    self.searchController.searchResultsUpdater = self;
+    
+    self.searchController.searchBar.frame = CGRectMake(self.searchController.searchBar.frame.origin.x, self.searchController.searchBar.frame.origin.y, self.searchController.searchBar.frame.size.width, 44.0);
+    
+    self.tableView.tableHeaderView = self.searchController.searchBar;
+    
+    NSMutableArray *scopeButtonTitles = [[NSMutableArray alloc] init];
+    [scopeButtonTitles addObject:NSLocalizedString(@"歷史清單", @"Search display controller All button.")];
+    [scopeButtonTitles addObject:NSLocalizedString(@"熱門搜尋", @"Search display controller All button.")];
+    
+    self.searchController.searchBar.scopeButtonTitles = scopeButtonTitles;
+    self.searchController.searchBar.delegate = self;
+    
+    self.definesPresentationContext = YES;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -187,10 +222,6 @@ static TTTTimeIntervalFormatter *timeFormatter;
         [query whereKey:@"category" equalTo:self.myCategory];
     }
     
-    if (self.keyWords.length > 0) {
-        [query whereKey:@"content" containedIn:[NSArray arrayWithObject:self.keyWords]];
-    }
-    
     [query orderByDescending:@"postDate"];
     
     return query;
@@ -218,11 +249,7 @@ static TTTTimeIntervalFormatter *timeFormatter;
         [query whereKey:@"category" equalTo:self.myCategory];
     }
     
-    if (self.keyWords.length > 0) {
-        [query whereKey:@"content" containedIn:[NSArray arrayWithObject:self.keyWords]];
-    }
-    
-    [query countObjectsInBackgroundWithBlock:^(int number, NSError * _Nullable error) {
+    [query countObjectsInBackgroundWithBlock:^(int number, NSError *error) {
         if (!error) {
             self.mainTitleLabel.text = [NSString stringWithFormat:@"共%i筆代買資訊", number];
         }
@@ -286,20 +313,11 @@ static TTTTimeIntervalFormatter *timeFormatter;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellIdentifier = @"POPCell";
     
-    NSLog(@"tableView = %@", tableView);
     
     PopTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (!cell) {
         cell = [[PopTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
                                        reuseIdentifier:cellIdentifier];
-    }
-    
-    if([UISearchController class]){
-        //Create an UISearchController and add it to your UITableViewController
-        NSLog(@"1");
-    }else{
-        //Create an UISearchDisplayController and add it to your UITableViewController
-        NSLog(@"2");
     }
     
     // Configure the cell to show todo item with a priority at the bottom
@@ -347,38 +365,34 @@ static TTTTimeIntervalFormatter *timeFormatter;
                                        reuseIdentifier:cellIdentifier];
     }
     
-    if (tableView==self.searchDisplayController.searchResultsTableView) {
-        
-    }else{
-        // Configure the cell to show todo item with a priority at the bottom
-        cell.titleLabel.text = object[@"title"];
-        cell.categoryLabel.text = object[@"category"];
-        [cell.timeLabel setText:[timeFormatter stringForTimeIntervalFromDate:[NSDate date] toDate:[object objectForKey:@"postDate"]]];
-        
-        cell.helpBuyObject = object; //Parse上的物件
-        
-        PFQuery *query = [PFQuery queryWithClassName:@"Love"];
-        [query whereKey:@"helpBuy" equalTo:object];
-        [query whereKey:@"user" equalTo:[PFUser currentUser]];
-        [query fromLocalDatastore];
-        [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-            if (object) {
-                if ([[object objectForKey:@"isFollowed"] boolValue]) {
-                    [cell.isLovedButton setSelected:true];
-                }else{
-                    [cell.isLovedButton setSelected:false];
-                }
-                if ([[object objectForKey:@"isReaded"] boolValue]) {
-                    cell.isSelectView.alpha = 0.3;
-                }else{
-                    cell.isSelectView.alpha = 1.0;
-                }
+    // Configure the cell to show todo item with a priority at the bottom
+    cell.titleLabel.text = object[@"title"];
+    cell.categoryLabel.text = object[@"category"];
+    [cell.timeLabel setText:[timeFormatter stringForTimeIntervalFromDate:[NSDate date] toDate:[object objectForKey:@"postDate"]]];
+    
+    cell.helpBuyObject = object; //Parse上的物件
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"Love"];
+    [query whereKey:@"helpBuy" equalTo:object];
+    [query whereKey:@"user" equalTo:[PFUser currentUser]];
+    [query fromLocalDatastore];
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        if (object) {
+            if ([[object objectForKey:@"isFollowed"] boolValue]) {
+                [cell.isLovedButton setSelected:true];
             }else{
-                cell.isSelectView.alpha = 1.0;
                 [cell.isLovedButton setSelected:false];
             }
-        }];
-    }
+            if ([[object objectForKey:@"isReaded"] boolValue]) {
+                cell.isSelectView.alpha = 0.3;
+            }else{
+                cell.isSelectView.alpha = 1.0;
+            }
+        }else{
+            cell.isSelectView.alpha = 1.0;
+            [cell.isLovedButton setSelected:false];
+        }
+    }];
     
     
     return cell;
@@ -418,6 +432,76 @@ static TTTTimeIntervalFormatter *timeFormatter;
     [self performSegueWithIdentifier:@"category" sender:nil];
 }
 
+#pragma mark - UISearchResultsUpdating
+
+-(void)updateSearchResultsForSearchController:(UISearchController *)searchController {
+    NSLog(@"updateSearchResultsForSearchController");
+    NSString *searchString = [self.searchController.searchBar text];
+    
+    int selectedScopeButtonIndex = (int)[self.searchController.searchBar selectedScopeButtonIndex];
+    //scope = 0是自己歷史搜尋清單，scope=1熱門搜尋，是統計清單
+    [self updateFilteredContentForProductName:searchString type:selectedScopeButtonIndex block:^(BOOL succeeded, NSMutableArray *array) {
+        if (succeeded) {
+            if (searchString.length > 0) {
+                if (self.searchController.searchResultsController) {
+                    UINavigationController *navController = (UINavigationController *)self.searchController.searchResultsController;
+                    
+                    SearchResultsTableViewController *vc = (SearchResultsTableViewController *)navController.topViewController;
+                    vc.searchResults = array;
+                    [vc.tableView reloadData];
+                }
+            }
+            
+        }else{
+            NSLog(@"出錯 %@", array);
+        }
+    }];
+}
+
+#pragma mark - UISearchBarDelegate
+
+// Workaround for bug: -updateSearchResultsForSearchController: is not called when scope buttons change
+- (void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope {
+    NSLog(@"selectedScopeButtonIndexDidChange %ld", selectedScope);
+    [self updateSearchResultsForSearchController:self.searchController];
+}
+
+
+#pragma mark - Content Filtering
+
+- (void)updateFilteredContentForProductName:(NSString *)searchString type:(int)typeName block:(void (^)(BOOL succeeded, NSMutableArray *array))completionBlock{
+    
+    //typeName = 0 歷史紀錄，typeNmae = 1 熱門搜尋
+    if (typeName == 0) {
+        PFQuery *mySearchQuery = [PFQuery queryWithClassName:@"MySearch"];
+        [mySearchQuery whereKey:@"user" equalTo:[PFUser currentUser]];
+        [mySearchQuery fromLocalDatastore];
+        [mySearchQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if (objects.count > 0) {
+                self.searchResults = (NSMutableArray *)objects;
+                completionBlock(TRUE, self.searchResults);
+            }else{
+                NSMutableArray *array = [NSMutableArray arrayWithObject:error];
+                completionBlock(FALSE, array);
+            }
+            
+        }];
+    }else {
+        PFQuery *mySearchQuery = [PFQuery queryWithClassName:@"SearchResults"];
+        [mySearchQuery whereKey:@"searchKey" containsString:searchString];
+        [mySearchQuery orderByDescending:@"count"];
+        [mySearchQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if (!error) {
+                self.searchResults = (NSMutableArray *)objects;
+                completionBlock(TRUE, self.searchResults);
+            }else{
+                NSMutableArray *array = [NSMutableArray arrayWithObject:error];
+                completionBlock(FALSE, array);
+            }
+        }];
+    }
+}
+
 #pragma mark - Search Delegate
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar{
@@ -426,24 +510,62 @@ static TTTTimeIntervalFormatter *timeFormatter;
 }
 
 - (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar{
-    NSLog(@"搜索End");
-    [self loadObjects];
+    NSLog(@"搜索End search Key = %@", searchBar.text);
     
-    self.keyWords = @"";
-    return YES;
-}
-
-- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString{
-    // 谓词的包含语法,之前文章介绍过http://www.cnblogs.com/xiaofeixiang/
-    NSPredicate *preicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[c] %@", searchString];
-    self.keyWords = searchString;
+    NSString *searchKey = searchBar.text;
     
-    if (self.searchList!= nil) {
-        [self.searchList removeAllObjects];
+    if (searchKey.length > 0 ) {
+        PFACL *ACL = [PFACL ACL];
+        [ACL setPublicReadAccess:YES];
+        [ACL setPublicWriteAccess:YES];
+        
+        //不管選擇歷史清單還是熱門搜尋，全部都要存到網路上，還有LocalDB
+        PFQuery *mySearch = [PFQuery queryWithClassName:@"MySearch"];
+        [mySearch whereKey:@"user" equalTo:[PFUser currentUser]];
+        [mySearch whereKey:@"searchKey" equalTo:searchKey];
+        [mySearch fromLocalDatastore];
+        [mySearch getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+            if (object) {
+                int count = [[object objectForKey:@"count"] intValue];
+                [object setObject:[NSNumber numberWithInt:count+1] forKey:@"count"];
+                object.ACL = ACL;
+                [object pinInBackground];
+                [object saveEventually];
+                
+            }else{
+                PFObject *mySearch = [PFObject objectWithClassName:@"MySearch"];
+                [mySearch setObject:[PFUser currentUser] forKey:@"user"];
+                [mySearch setObject:[NSNumber numberWithInt:1] forKey:@"count"];
+                [mySearch setObject:searchKey forKey:@"searchKey"];
+                mySearch.ACL = ACL;
+                [mySearch pinInBackground];
+                [mySearch saveEventually];
+            }
+        }];
+        
+        
+        PFQuery *querySearch = [PFQuery queryWithClassName:@"SearchResults"];
+        [querySearch whereKey:@"searchKey" equalTo:searchKey];
+        [querySearch getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+            if (object) {
+                int count = [[object objectForKey:@"count"] intValue];
+                [object setObject:[NSNumber numberWithInt:count+1] forKey:@"count"];
+                object.ACL = ACL;
+                [object pinInBackground];
+                [object saveEventually];
+            }else{
+                PFObject *searchResult = [PFObject objectWithClassName:@"SearchResults"];
+                [searchResult setObject:searchKey forKey:@"searchKey"];
+                [searchResult setObject:[NSNumber numberWithInt:1] forKey:@"count"];
+                searchResult.ACL = ACL;
+                [searchResult pinInBackground];
+                [searchResult saveEventually];
+            }
+        }];
+        
+        //直接轉場至搜尋結果。
     }
-    //过滤数据
-//    self.searchList = [NSMutableArray arrayWithArray:[_dataList filteredArrayUsingPredicate:preicate]];
-    //刷新表格
+    
     return YES;
 }
 

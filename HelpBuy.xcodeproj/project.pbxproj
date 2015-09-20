@@ -37,6 +37,8 @@
 		23D7DA8E1B7733D6001A127A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 23D7DA8D1B7733D6001A127A /* Images.xcassets */; };
 		23D7DA911B7733D6001A127A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 23D7DA8F1B7733D6001A127A /* LaunchScreen.xib */; };
 		23D7DA9D1B7733D7001A127A /* HelpBuyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 23D7DA9C1B7733D7001A127A /* HelpBuyTests.m */; };
+		23E709711BAEB9EB00942554 /* SearchResultsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23E709701BAEB9EB00942554 /* SearchResultsTableViewController.m */; };
+		23E709741BAEBA2C00942554 /* SearchDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23E709731BAEBA2C00942554 /* SearchDetailTableViewController.m */; };
 		23F2A45C1B97257600D2B8E6 /* HelpBuyDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F2A45B1B97257600D2B8E6 /* HelpBuyDetailViewController.m */; };
 		2CB80F5C005F225F9EA843DE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 64A423E0ACF5815700116D55 /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -111,6 +113,10 @@
 		23D7DA961B7733D7001A127A /* HelpBuyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HelpBuyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		23D7DA9B1B7733D7001A127A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		23D7DA9C1B7733D7001A127A /* HelpBuyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelpBuyTests.m; sourceTree = "<group>"; };
+		23E7096F1BAEB9EB00942554 /* SearchResultsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultsTableViewController.h; sourceTree = "<group>"; };
+		23E709701BAEB9EB00942554 /* SearchResultsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultsTableViewController.m; sourceTree = "<group>"; };
+		23E709721BAEBA2C00942554 /* SearchDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchDetailTableViewController.h; sourceTree = "<group>"; };
+		23E709731BAEBA2C00942554 /* SearchDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchDetailTableViewController.m; sourceTree = "<group>"; };
 		23F2A45A1B97257600D2B8E6 /* HelpBuyDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpBuyDetailViewController.h; sourceTree = "<group>"; };
 		23F2A45B1B97257600D2B8E6 /* HelpBuyDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpBuyDetailViewController.m; sourceTree = "<group>"; };
 		28E36FFC5898F4971D1EB3A5 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -287,6 +293,7 @@
 				236EED461B9485190067B2F1 /* 常用的Library */,
 				236EED381B9483EA0067B2F1 /* Utils */,
 				23F2A4591B97253000D2B8E6 /* 代買 */,
+				23E7096E1BAEB9C500942554 /* 搜尋table */,
 				231601871B99D209007ED6A1 /* 訂閱追蹤 */,
 				23D7DA811B7733D6001A127A /* AppDelegate.h */,
 				23D7DA821B7733D6001A127A /* AppDelegate.m */,
@@ -326,6 +333,17 @@
 				23D7DA9B1B7733D7001A127A /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		23E7096E1BAEB9C500942554 /* 搜尋table */ = {
+			isa = PBXGroup;
+			children = (
+				23E7096F1BAEB9EB00942554 /* SearchResultsTableViewController.h */,
+				23E709701BAEB9EB00942554 /* SearchResultsTableViewController.m */,
+				23E709721BAEBA2C00942554 /* SearchDetailTableViewController.h */,
+				23E709731BAEBA2C00942554 /* SearchDetailTableViewController.m */,
+			);
+			name = "搜尋table";
 			sourceTree = "<group>";
 		};
 		23F2A4591B97253000D2B8E6 /* 代買 */ = {
@@ -514,6 +532,7 @@
 				236EED651B9485190067B2F1 /* MinnaMessageView.m in Sources */,
 				23D7DA831B7733D6001A127A /* AppDelegate.m in Sources */,
 				236EED691B9485190067B2F1 /* UIImage+ImageEffects.m in Sources */,
+				23E709711BAEB9EB00942554 /* SearchResultsTableViewController.m in Sources */,
 				236EED6A1B9485190067B2F1 /* UIImage+ResizeAdditions.m in Sources */,
 				236EED661B9485190067B2F1 /* MinnaOpenGraphRequest.m in Sources */,
 				23D7DA861B7733D6001A127A /* HelpBuy.xcdatamodeld in Sources */,
@@ -525,6 +544,7 @@
 				2316018A1B99D237007ED6A1 /* MyLoveHelpBuyTableViewController.m in Sources */,
 				236EED431B9483FF0067B2F1 /* CMUtility.m in Sources */,
 				236EED441B9483FF0067B2F1 /* Utils.m in Sources */,
+				23E709741BAEBA2C00942554 /* SearchDetailTableViewController.m in Sources */,
 				236EED6D1B9485190067B2F1 /* UISwipe4ScrollGestureRecognizer.m in Sources */,
 				236EED681B9485190067B2F1 /* UIImage+AlphaAdditions.m in Sources */,
 				23D7DA891B7733D6001A127A /* ViewController.m in Sources */,

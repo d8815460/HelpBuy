@@ -15,11 +15,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *mainTitleLabel;
 @property (strong, nonatomic) IBOutlet UIButton *categoryButton;
 @property (strong, nonatomic) NSString *myCategory;
-@property (strong,nonatomic) NSMutableArray  *dataList;
-@property (strong,nonatomic) NSMutableArray  *searchList;
+@property (strong, nonatomic) NSMutableArray  *dataList;    // = self.objects
+@property (strong, nonatomic) NSMutableArray  *searchList; //關鍵字的歷史紀錄，user的searchHistory
 @property (strong, nonatomic) MBProgressHUD *hud;
 @property (strong, nonatomic) NSString *keyWords;
-@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
 - (IBAction)categoryButtonPressed:(id)sender;
 @end
