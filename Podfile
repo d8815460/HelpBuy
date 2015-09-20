@@ -26,4 +26,3 @@ pod 'Canvas'
 
 pod 'Fabric'
 pod 'Crashlytics'
-pod update 'Crashlytics'
