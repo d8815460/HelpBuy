@@ -700,7 +700,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.parseapp.helpbuy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "7303d215-a047-48ac-abce-3261d7279d70";
 			};
 			name = Debug;
 		};
@@ -710,15 +710,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Amira Consultant Co., Ltd (D3QVFELAEF)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: CHUN I CHEN (8LJ7V3WEL3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: CHUN I CHEN (8LJ7V3WEL3)";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/HelpBuyTests/PrefixHeader.pch";
 				INFOPLIST_FILE = HelpBuy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.parseapp.helpbuy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "7303d215-a047-48ac-abce-3261d7279d70";
 			};
 			name = Release;
 		};

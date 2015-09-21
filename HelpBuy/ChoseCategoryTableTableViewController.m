@@ -218,7 +218,7 @@
     if (indexPath.row == 9) {
         [self cellObject:cell isSelected:[[myPreCategory objectForKey:@"isMYS"] boolValue]];
         cell.titleLabel.text = @"馬來西亞地區";
-        cell.categoryLabel.text = @"買來西亞";
+        cell.categoryLabel.text = @"馬來西亞";
     }
     if (indexPath.row == 10) {
         [self cellObject:cell isSelected:[[myPreCategory objectForKey:@"isNZL"] boolValue]];
