@@ -28,7 +28,7 @@
     [myLoveQuery whereKey:@"user" equalTo:[PFUser currentUser]];
     [myLoveQuery whereKey:@"helpBuy" equalTo:_helpBuyObject];
     [myLoveQuery fromLocalDatastore];
-    [myLoveQuery getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+    [myLoveQuery getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
         if (!error) {
             if ([[object objectForKey:@"isFollowed"] boolValue]) {
                 [self.followButton setTitle:@"不追蹤" forState:UIControlStateNormal];
@@ -56,4 +56,48 @@
 }
 */
 
+- (IBAction)followButtonPressed:(id)sender {
+    
+    PFQuery *loveQuery = [PFQuery queryWithClassName:@"Love"];
+    [loveQuery whereKey:@"user" equalTo:[PFUser currentUser]];
+    [loveQuery whereKey:@"helpBuy" equalTo:_helpBuyObject];
+    [loveQuery fromLocalDatastore];
+    PFACL *ACL = [PFACL ACL];
+    [ACL setPublicReadAccess:YES];
+    [ACL setPublicWriteAccess:YES];
+    
+    [loveQuery getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        
+        if (!error) {
+            if ([self.followButton.titleLabel.text isEqualToString:@"追蹤"]) {
+                [self.followButton setTitle:@"不追蹤" forState:UIControlStateNormal];
+                object.ACL = ACL;
+                [object setObject:[NSNumber numberWithBool:TRUE] forKey:@"isFollowed"];
+                
+                //Tabbar 的 count +1
+                
+                NSNumber *finalNumber = [NSNumber numberWithInt:([[[AppDelegate sharedDelegate] getTabbarBadgeNumber] intValue] + 1)];
+                [[AppDelegate sharedDelegate] addTabBarBadge:finalNumber];
+            }else{
+                [self.followButton setTitle:@"追蹤" forState:UIControlStateNormal];
+                object.ACL = ACL;
+                [object setObject:[NSNumber numberWithBool:FALSE] forKey:@"isFollowed"];
+                
+                //Tabbar 的 count -1
+                if ([[[AppDelegate sharedDelegate] getTabbarBadgeNumber] intValue] < 1) {
+                    
+                }else{
+                    NSNumber *finalNumber = [NSNumber numberWithInt:([[[AppDelegate sharedDelegate] getTabbarBadgeNumber] intValue] - 1)];
+                    [[AppDelegate sharedDelegate] addTabBarBadge:finalNumber];
+                }
+            }
+            [object pinInBackground];
+            [object saveEventually];
+            
+        }
+        
+    }];
+    
+    
+}
 @end

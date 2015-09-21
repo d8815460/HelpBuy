@@ -15,4 +15,5 @@
 @property (weak, nonatomic) IBOutlet UIButton *followButton;
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 
+- (IBAction)followButtonPressed:(id)sender;
 @end

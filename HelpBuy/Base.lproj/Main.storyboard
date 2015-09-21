@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15B17c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="HGV-D8-Vgw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="HGV-D8-Vgw">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -35,7 +34,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dNm-Tt-qf8" customClass="CSAnimationView">
-                                            <rect key="frame" x="14" y="14" width="50" height="50"/>
+                                            <rect key="frame" x="7" y="14" width="50" height="50"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="代買" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="X5c-Hf-3m2">
                                                     <rect key="frame" x="4" y="14" width="42" height="21"/>
@@ -71,7 +70,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="plm-JG-k2a">
-                                            <rect key="frame" x="0.0" y="0.0" width="7" height="79"/>
+                                            <rect key="frame" x="-8" y="0.0" width="7" height="79"/>
                                             <animations/>
                                             <color key="backgroundColor" red="0.30196079609999998" green="0.74509805439999999" blue="0.84705889229999998" alpha="1" colorSpace="deviceRGB"/>
                                             <constraints>
@@ -122,13 +121,13 @@
                                         <constraint firstAttribute="centerY" secondItem="dNm-Tt-qf8" secondAttribute="centerY" id="CTi-XO-x3b"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="rnl-pr-YRj" secondAttribute="bottom" constant="-6.5" id="MBA-a5-wVS"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="QGH-u2-oRh" secondAttribute="trailing" constant="50" id="QAw-r8-Dnw"/>
-                                        <constraint firstItem="plm-JG-k2a" firstAttribute="leading" secondItem="AL9-PW-yuc" secondAttribute="leadingMargin" constant="-8" id="T1u-EU-JKn"/>
-                                        <constraint firstItem="dNm-Tt-qf8" firstAttribute="leading" secondItem="plm-JG-k2a" secondAttribute="trailing" constant="7" id="T2Y-lv-nQv"/>
+                                        <constraint firstItem="plm-JG-k2a" firstAttribute="leading" secondItem="AL9-PW-yuc" secondAttribute="leadingMargin" constant="-16" id="T1u-EU-JKn"/>
+                                        <constraint firstItem="dNm-Tt-qf8" firstAttribute="leading" secondItem="plm-JG-k2a" secondAttribute="trailing" constant="8" id="T2Y-lv-nQv"/>
                                         <constraint firstAttribute="centerY" secondItem="QGH-u2-oRh" secondAttribute="centerY" id="V4d-vs-rVz"/>
                                         <constraint firstItem="2Ov-ez-CCa" firstAttribute="top" secondItem="AL9-PW-yuc" secondAttribute="topMargin" constant="-9" id="eNu-9I-yWE"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="2Ov-ez-CCa" secondAttribute="bottom" constant="-7" id="go7-8s-30b"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="2Ov-ez-CCa" secondAttribute="trailing" constant="-25" id="keh-ch-ljK"/>
-                                        <constraint firstItem="QGH-u2-oRh" firstAttribute="leading" secondItem="dNm-Tt-qf8" secondAttribute="trailing" constant="3" id="vox-wq-hfO"/>
+                                        <constraint firstItem="QGH-u2-oRh" firstAttribute="leading" secondItem="dNm-Tt-qf8" secondAttribute="trailing" constant="10" id="vox-wq-hfO"/>
                                         <constraint firstItem="rnl-pr-YRj" firstAttribute="trailing" secondItem="AL9-PW-yuc" secondAttribute="trailingMargin" id="wD2-9V-cLI"/>
                                     </constraints>
                                     <variation key="default">
@@ -211,7 +210,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qXb-6j-dhx">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qXb-6j-dhx">
                                 <rect key="frame" x="0.0" y="44" width="600" height="493"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -219,10 +218,10 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES"/>
                             </textView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LfW-zL-ka5">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LfW-zL-ka5">
                                 <rect key="frame" x="0.0" y="64" width="600" height="44"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="作者：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LUf-Do-hiG">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="作者：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LUf-Do-hiG">
                                         <rect key="frame" x="8" y="11" width="584" height="21"/>
                                         <animations/>
                                         <constraints>
@@ -281,6 +280,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <animations/>
                                 <state key="normal" title="追蹤"/>
+                                <connections>
+                                    <action selector="followButtonPressed:" destination="Eez-3G-SWb" eventType="touchUpInside" id="NzH-F0-Y9f"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
@@ -552,7 +554,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5OD-U8-Pyw" customClass="CSAnimationView">
-                                            <rect key="frame" x="14" y="14" width="50" height="50"/>
+                                            <rect key="frame" x="7" y="14" width="50" height="50"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="代買" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="bzP-9V-kpf">
                                                     <rect key="frame" x="4" y="14" width="42" height="21"/>
@@ -588,7 +590,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BzN-am-oYE">
-                                            <rect key="frame" x="0.0" y="0.0" width="7" height="79"/>
+                                            <rect key="frame" x="-8" y="0.0" width="7" height="79"/>
                                             <animations/>
                                             <color key="backgroundColor" red="0.30196079609999998" green="0.74509805439999999" blue="0.84705889229999998" alpha="1" colorSpace="deviceRGB"/>
                                             <constraints>
@@ -640,12 +642,12 @@
                                         <constraint firstItem="xyV-gN-wxD" firstAttribute="trailing" secondItem="Hbe-Hk-hKk" secondAttribute="trailingMargin" id="Epq-Ej-HOD"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="qtQ-k1-vCq" secondAttribute="trailing" constant="50" id="Ixc-KO-nA7"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="BzN-am-oYE" secondAttribute="bottom" constant="-8.5" id="KHi-6I-fhO"/>
-                                        <constraint firstItem="qtQ-k1-vCq" firstAttribute="leading" secondItem="5OD-U8-Pyw" secondAttribute="trailing" constant="3" id="SdB-3s-Qg6"/>
+                                        <constraint firstItem="qtQ-k1-vCq" firstAttribute="leading" secondItem="5OD-U8-Pyw" secondAttribute="trailing" constant="10" id="SdB-3s-Qg6"/>
                                         <constraint firstItem="GSL-pl-OWk" firstAttribute="top" secondItem="Hbe-Hk-hKk" secondAttribute="topMargin" constant="-9" id="YIr-WY-Vwf"/>
                                         <constraint firstAttribute="centerY" secondItem="5OD-U8-Pyw" secondAttribute="centerY" id="bad-0h-HJX"/>
-                                        <constraint firstItem="BzN-am-oYE" firstAttribute="leading" secondItem="Hbe-Hk-hKk" secondAttribute="leadingMargin" constant="-8" id="bdw-Sk-ige"/>
+                                        <constraint firstItem="BzN-am-oYE" firstAttribute="leading" secondItem="Hbe-Hk-hKk" secondAttribute="leadingMargin" constant="-16" id="bdw-Sk-ige"/>
                                         <constraint firstAttribute="centerY" secondItem="qtQ-k1-vCq" secondAttribute="centerY" id="c5p-9Y-mBc"/>
-                                        <constraint firstItem="5OD-U8-Pyw" firstAttribute="leading" secondItem="BzN-am-oYE" secondAttribute="trailing" constant="7" id="kBv-eG-Upz"/>
+                                        <constraint firstItem="5OD-U8-Pyw" firstAttribute="leading" secondItem="BzN-am-oYE" secondAttribute="trailing" constant="8" id="kBv-eG-Upz"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="GSL-pl-OWk" secondAttribute="trailing" constant="-25" id="m8s-sa-Ah0"/>
                                     </constraints>
                                     <variation key="default">

@@ -195,6 +195,8 @@ static TTTTimeIntervalFormatter *timeFormatter;
         [self.categoryButton setTitle:@"不拘" forState:UIControlStateNormal];
         self.myCategory = @"";
     }
+    
+    [self.tableView reloadData];
 }
 
 - (void) myCategory:(NSString *)category {

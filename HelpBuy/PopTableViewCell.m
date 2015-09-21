@@ -94,6 +94,7 @@
                 [ACL setPublicWriteAccess:YES];
                 object.ACL = ACL;
                 
+                [object pinInBackground];
                 [object saveEventually:^(BOOL succeeded, NSError *error) {
                     
                 }];
@@ -109,6 +110,7 @@
                 [ACL setPublicWriteAccess:YES];
                 LoveObject.ACL = ACL;
                 
+                [LoveObject pinInBackground];
                 [LoveObject saveEventually:^(BOOL succeeded, NSError *error) {
                     
                 }];
