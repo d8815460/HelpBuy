@@ -437,7 +437,7 @@
 				TargetAttributes = {
 					23D7DA791B7733D6001A127A = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = D3QVFELAEF;
+						DevelopmentTeam = 8LJ7V3WEL3;
 					};
 					23D7DA951B7733D7001A127A = {
 						CreatedOnToolsVersion = 6.4;
@@ -698,7 +698,7 @@
 				INFOPLIST_FILE = HelpBuy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.eatingdate;
+				PRODUCT_BUNDLE_IDENTIFIER = com.parseapp.helpbuy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -716,7 +716,7 @@
 				INFOPLIST_FILE = HelpBuy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.eatingdate;
+				PRODUCT_BUNDLE_IDENTIFIER = com.parseapp.helpbuy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
