@@ -82,7 +82,10 @@ static TTTTimeIntervalFormatter *timeFormatter;
     [query whereKey:@"category" notEqualTo:@"檢舉"];
     [query whereKey:@"category" notEqualTo:@"參選"];
     
-    [query whereKey:@"content" containsString:[self.searchKey objectForKey:@"searchKey"]];
+    NSString *str = [self.searchKey objectForKey:@"searchKey"];
+    NSArray *list = [str componentsSeparatedByString:@" "];// 以空格分割成数组
+    
+    [query whereKey:@"content" containsString:[list objectAtIndex:0]];
     
     [query orderByDescending:@"postDate"];
     

@@ -10,7 +10,7 @@
 #import "ChoseCategoryTableTableViewController.h"
 #import <MBProgressHUD.h>
 
-@interface MainTableViewController : PFQueryTableViewController <ChoseCategoryTableTableViewControllerDelegate, UISearchBarDelegate, UISearchDisplayDelegate>
+@interface MainTableViewController : PFQueryTableViewController <ChoseCategoryTableTableViewControllerDelegate, UISearchBarDelegate, UISearchDisplayDelegate, UISearchControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *mainTitleLabel;
 @property (strong, nonatomic) IBOutlet UIButton *categoryButton;

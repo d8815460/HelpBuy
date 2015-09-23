@@ -90,8 +90,9 @@ static TTTTimeIntervalFormatter *timeFormatter;
     self.tableView.tableHeaderView = self.searchController.searchBar;
     
     NSMutableArray *scopeButtonTitles = [[NSMutableArray alloc] init];
-    [scopeButtonTitles addObject:NSLocalizedString(@"過去搜尋歷史", @"Search display controller All button.")];
     [scopeButtonTitles addObject:NSLocalizedString(@"網路熱門搜尋", @"Search display controller All button.")];
+    [scopeButtonTitles addObject:NSLocalizedString(@"過去搜尋歷史", @"Search display controller All button.")];
+    
     
     self.searchController.searchBar.scopeButtonTitles = scopeButtonTitles;
     self.searchController.searchBar.delegate = self;
@@ -486,8 +487,23 @@ static TTTTimeIntervalFormatter *timeFormatter;
 
 - (void)updateFilteredContentForProductName:(NSString *)searchString type:(int)typeName block:(void (^)(BOOL succeeded, NSMutableArray *array))completionBlock{
     
-    //typeName = 0 歷史紀錄，typeNmae = 1 熱門搜尋
+    //typeName = 1 歷史紀錄，typeNmae = 0 熱門搜尋
     if (typeName == 0) {
+        PFQuery *mySearchQuery = [PFQuery queryWithClassName:@"SearchResults"];
+        if (searchString.length > 0) {
+            [mySearchQuery whereKey:@"searchKey" containsString:searchString];
+        }
+        [mySearchQuery orderByDescending:@"count"];
+        [mySearchQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if (!error) {
+                self.searchResults = (NSMutableArray *)objects;
+                completionBlock(TRUE, self.searchResults);
+            }else{
+                NSMutableArray *array = [NSMutableArray arrayWithObject:error];
+                completionBlock(FALSE, array);
+            }
+        }];
+    }else {
         PFQuery *mySearchQuery = [PFQuery queryWithClassName:@"MySearch"];
         [mySearchQuery whereKey:@"user" equalTo:[PFUser currentUser]];
         if (searchString.length > 0) {
@@ -504,25 +520,18 @@ static TTTTimeIntervalFormatter *timeFormatter;
             }
             
         }];
-    }else {
-        PFQuery *mySearchQuery = [PFQuery queryWithClassName:@"SearchResults"];
-        if (searchString.length > 0) {
-            [mySearchQuery whereKey:@"searchKey" containsString:searchString];
-        }
-        [mySearchQuery orderByDescending:@"count"];
-        [mySearchQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-            if (!error) {
-                self.searchResults = (NSMutableArray *)objects;
-                completionBlock(TRUE, self.searchResults);
-            }else{
-                NSMutableArray *array = [NSMutableArray arrayWithObject:error];
-                completionBlock(FALSE, array);
-            }
-        }];
+        
     }
 }
 
 #pragma mark - Search Delegate
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+{
+    searchBar.showsCancelButton = YES;
+    searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
+}
+
 - (void)willPresentSearchController:(UISearchController *)searchController
 {
     dispatch_async(dispatch_get_main_queue(), ^{
