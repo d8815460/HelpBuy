@@ -109,7 +109,7 @@ static TTTTimeIntervalFormatter *timeFormatter;
         PFQuery *query = [PFQuery queryWithClassName:@"Love"];
         [query whereKey:@"helpBuy" equalTo:buyObject];
         [query whereKey:@"user" equalTo:[PFUser currentUser]];
-        [query fromLocalDatastore];
+//        [query fromLocalDatastore];
         [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
             if (object) {
                 if (!object[@"isReaded"]) {
