@@ -163,3 +163,101 @@ parse.Cloud.define("iLoveThisHelpBuy", function(request, response){
 	}
 });
 
+
+
+
+//代買首頁的Query, 1.myCategory選擇類別名稱（國家地區），2.pageNumbers頁碼（一頁只顯示25筆資料）
+//request.params.myCategory 如果沒有，就是預設全部回傳
+//request.params.pageNumbers
+Parse.Cloud.define("mainQuery", function(request, response) {
+  var query = new Parse.Query("HelpBuy");
+  query.notEqualTo("category", "推薦");
+  query.notEqualTo("category", "公告");
+  query.notEqualTo("category", "問題");
+  query.notEqualTo("category", "版務");
+  query.notEqualTo("category", "情報");
+  query.notEqualTo("category", "檢舉");
+  query.notEqualTo("category", "參選");
+  
+  if (request.params.myCategory.length > 0) {
+	  query.equalTo("category", request.params.myCategory);
+  }
+  
+  query.limit(1000);  // limit to at most 1000 results
+  
+  query.skip(25*request.params.pageNumbers);	// skip the first 25*pageNumber results
+  
+  query.descending("postDate");
+  query.find({
+    success: function(results) {
+//	  if (results.get("date") === request.params.postDate){
+//	  	response.error("failed");
+//	  } else {
+	  	response.success(results);
+//	  }
+    },
+    error: function(response) {
+	  console.log(response);
+      response.error("failed");
+    }
+  });
+});
+
+
+
+//追蹤頁的Query, 1.currentUser當前用戶
+//request.params.currentUser 
+Parse.Cloud.define("loveQuery", function(request, response) {
+  var query = new Parse.Query("Love");
+  // Include the post data with each comment
+  query.include("helpBuy");
+  query.equalTo("isFollowed", true);
+  query.equalTo("user", request.params.currentUser);
+  
+  query.limit(1000);  // limit to at most 1000 results
+  
+  query.descending("updatedAt");
+  query.find({
+    success: function(results) {
+//	  if (results.get("date") === request.params.postDate){
+//	  	response.error("failed");
+//	  } else {
+	  	response.success(results);
+//	  }
+    },
+    error: function(response) {
+	  console.log(response);
+      response.error("failed");
+    }
+  });
+});
+
+
+
+
+/*
+     台灣     	isTWN   0
+     美國     	isUSA   1
+     日本    	isJPN   2
+     中國    	isCHN   3
+     香港    	isHKG   4
+     韓國     	isKOR   5
+     泰國     	isTHA   6
+     新加坡    	isSGP   7
+     馬來西亞  	isMYS   8
+     紐西蘭    	isNZL   9
+     越南     	isVNM   10
+     德國     	isDEU   11
+     法國     	isFRA   12
+     英國     	isGBR   13
+     歐洲     	isEU    14
+     澳洲     	isAUS   15
+     非洲     	isAFR   16
+     外國     	isFor   17
+     徵求     	isAsk   18
+     推薦     	isRec   19
+     不拘     	isAll   20
+     //結束
+*/
+//選擇國家（地區）之後，類別要記得換。
+
