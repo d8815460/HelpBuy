@@ -1,0 +1,10 @@
+{
+  "applications": {
+    "HelpBuy": {
+      "applicationId": "EoAplzLMJaf7ZGSvpJEWvbKz0rEBlR3nKUG9pLww"
+    },
+    "_default": {
+      "link": "HelpBuy"
+    }
+  }
+}
