@@ -398,6 +398,7 @@
 				23D7DA781B7733D6001A127A /* Resources */,
 				F697F3C30885167CC2C52390 /* Copy Pods Resources */,
 				236EED6F1B9487E40067B2F1 /* ShellScript */,
+				85962CDD418DF8A5C6F06F48 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -437,7 +438,6 @@
 				TargetAttributes = {
 					23D7DA791B7733D6001A127A = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 8LJ7V3WEL3;
 					};
 					23D7DA951B7733D7001A127A = {
 						CreatedOnToolsVersion = 6.4;
@@ -512,6 +512,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		85962CDD418DF8A5C6F06F48 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F697F3C30885167CC2C52390 /* Copy Pods Resources */ = {
@@ -701,7 +716,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.parseapp.helpbuy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6f563af4-bcc1-4a9c-94ec-29945bdf87ee";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -711,7 +726,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: CHUN I CHEN (8LJ7V3WEL3)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: CHUN I CHEN (8LJ7V3WEL3)";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/HelpBuyTests/PrefixHeader.pch";
@@ -720,7 +735,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.parseapp.helpbuy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6f563af4-bcc1-4a9c-94ec-29945bdf87ee";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
